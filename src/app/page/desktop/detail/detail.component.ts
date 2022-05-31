@@ -4,6 +4,8 @@ import { ApiRequestService } from './../../../service/api-request.service';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { DetailInfo } from 'src/app/model/detail-info.model';
+import { Router } from '@angular/router';
+
 
 @Component({
     selector: 'app-detail',
@@ -24,8 +26,9 @@ export class DetailComponent implements OnInit, AfterViewInit {
     private map: any;
     commonCard: any;
     surroundList: CommonCard[] = [];
+    type: string = 'ScenicSpot';
 
-    constructor(private api: ApiRequestService) {
+    constructor(private api: ApiRequestService, private router: Router) {
 
     }
 
@@ -39,7 +42,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
             this.bindInfo(this.source);
             this.initMap();
             this.getSurroundSpot(this.detailInfo.position.PositionLat, this.detailInfo.position.PositionLon, CommonUtilitiesService.sourceType(this.source))
-            console.log(this.source);
+            this.type = this.getByValue(this.detailInfo.type) || 'ScenicSpot';
         });
     }
 
@@ -49,25 +52,27 @@ export class DetailComponent implements OnInit, AfterViewInit {
 
         switch (type) {
             case 'ScenicSpot':
-                this.api.getScenicSpotList(appData).subscribe(source=>{
+                this.api.getScenicSpotList(appData).subscribe(source => {
                     this.commonCardSetter(source);
                 });
                 break;
             case 'Restaurant':
-                this.api.getRestaurantList(appData).subscribe(source=>{
+                this.api.getRestaurantList(appData).subscribe(source => {
                     this.commonCardSetter(source);
                 });
                 break;
             case 'Activity':
-                this.api.getActivityList(appData).subscribe(source=>{
+                this.api.getActivityList(appData).subscribe(source => {
                     this.commonCardSetter(source);
                 });
                 break;
         }
     }
 
-    private commonCardSetter(list:any){
-        list.forEach((s:any) => {
+    private commonCardSetter(list: any) {
+        this.surroundList = [];
+
+        list.forEach((s: any) => {
             this.surroundList.push(CommonUtilitiesService.SetCommonCard(s));
         });
 
@@ -140,9 +145,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
     }
 
     setCarouselInfo(carousel: any) {
-
-
-
+        this.carouselInfos = [];
         for (let i = 0; i < 3; i++) {
             if (carousel.picture.hasOwnProperty(`PictureUrl${i + 1}`)) {
                 const obj = new CommonCard('', '', '', { PictureUrl1: '', PictureDescription1: '', }, '', '');
@@ -152,6 +155,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
             }
         }
     }
+
 
 
 

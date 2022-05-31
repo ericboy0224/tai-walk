@@ -35,7 +35,7 @@
     <div>
         <section class="desktop-homepage__carousel content-box">
             <div class="content-box__content">
-                <app-carousel [enable]="true" (searchCarousel)="searchScenicSpot('ScenicSpotID',$event)"
+                <app-carousel [enable]="true" (searchCarousel)="searchScenicSpot('ScenicSpot',$event)"
                     [carouselInfos]="carouselInfos"></app-carousel>
             </div>
         </section>
@@ -61,14 +61,14 @@
                                 {{activity.name}}
                             </h3>
                         </div>
-                        <div class="event__text__bottom" (click)="searchScenicSpot('ActivityId',activity.id)">
+                        <div class="event__text__bottom" (click)="searchScenicSpot('Activity',activity.id)">
                             <a href="javascript:void(0);" style="text-decoration: none;">
                                 <div class="spot-name">
                                     <img src="../../../../assets/icons/spots/spot16.svg" alt="spot icon">
                                     <p class="card-font card-font__comment">{{activity.city}}</p>
                                 </div>
                                 <div class="card-font card-font__comment">
-                                    <a (click)="searchScenicSpot('ActivityId',activity.id)"
+                                    <a (click)="searchScenicSpot('Activity',activity.id)"
                                         class="comment__more event__more" style="color: #7F977B" href="javascript:void(0);">
                                         <div class="comment__more__layout">詳細介紹 <mat-icon>chevron_right</mat-icon>
                                         </div>
@@ -90,7 +90,7 @@
             </div>
             <div class="content-box__content--col4-row1">
                 <ng-container *ngFor="let spot of hotSpotInfos">
-                    <app-spot-card (searchID)="searchScenicSpot('ScenicSpotID',spot.id);" [info]="spot"></app-spot-card>
+                    <app-spot-card (searchID)="searchScenicSpot('ScenicSpot',spot.id);" [info]="spot"></app-spot-card>
                 </ng-container>
             </div>
         </section>
@@ -104,7 +104,7 @@
             </div>
             <div class="content-box__content--col4-row1">
                 <ng-container *ngFor="let restaurant of hotRestaurantInfos">
-                    <app-spot-card (searchID)="searchScenicSpot('RestaurantId',restaurant.id);" [info]="restaurant"></app-spot-card>
+                    <app-spot-card (searchID)="searchScenicSpot('Restaurant',restaurant.id);" [info]="restaurant"></app-spot-card>
                 </ng-container>
 
                 <!-- <div class="spot-card" *ngFor="let restaurant of hotRestaurantInfos">

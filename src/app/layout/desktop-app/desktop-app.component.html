@@ -1,11 +1,12 @@
+<div class="overlay" *ngIf="isOpen" (click)="isOpen = false"></div>
 <div class="desktop">
     <header class="desktop__header">
         <nav class="desktop__header__content">
             <div class="desktop__header__content__logo--desktop">
-                <a href="#"><img src="../../../../assets/icons/logos/Logo-desktop.svg" alt="台灣走走的電腦 logo"></a>
+                <a routerLink="/home"><img src="../../../../assets/icons/logos/Logo-desktop.svg" alt="台灣走走的電腦 logo"></a>
             </div>
             <div class="desktop__header__content__logo--mobile">
-                <a href="#"><img src="../../../../assets/icons/logos/Logo-mobile.svg" alt="台灣走走的手機 logo"></a>
+                <a routerLink="/home"><img src="../../../../assets/icons/logos/Logo-mobile.svg" alt="台灣走走的手機 logo"></a>
             </div>
             <ul class="desktop__header__content__menu--desktop">
                 <li class="desktop__header__content__menu--desktop__item"><a href="#">探索景點</a></li>
@@ -13,11 +14,28 @@
                 <li class="desktop__header__content__menu--desktop__item"><a href="#">品嚐美食</a></li>
             </ul>
         </nav>
-        <div class="desktop__header__content__menu--mobile">
-            <span class="line--half"></span>
-            <span class="line--full"></span>
-            <span class="line--half"></span>
-        </div>
+        <a href="javascript:void(0);" class="desktop__header__content__menu--mobile" (click)="isOpen = !isOpen"
+            type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+            <span class="line line--half"></span>
+            <span class="line line--full"></span>
+            <span class="line line--half"></span>
+        </a>
+        <ng-template (blur)="isOpen = false" cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger"
+            [cdkConnectedOverlayOpen]="isOpen">
+            <div class="mobile-menu">
+                <div class="mobile-menu__header">
+                    <img class="mobile-menu__logo" src="../../../../assets/icons/logos/Logo-mobile.svg"
+                        alt="台灣走走的手機 logo">
+                </div>
+                <div class="mobile-menu__content">
+                    <ul class="mobile-menu__list">
+                        <li><a class="mobile-menu__btn" href="javascript:void(0);">探索景點</a></li>
+                        <li><a class="mobile-menu__btn" href="javascript:void(0);">節慶活動</a></li>
+                        <li><a class="mobile-menu__btn" href="javascript:void(0);">品嚐美食</a></li>
+                    </ul>
+                </div>
+            </div>
+        </ng-template>
 
     </header>
     <main class="desktop__content">

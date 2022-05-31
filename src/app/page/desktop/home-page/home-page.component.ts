@@ -84,23 +84,24 @@ export class HomePageComponent implements OnInit {
     /************  SCENIC ****************/
     searchScenicSpot(searchTarget: string, id: string) {
 
-        let apiData: string;
+        this.api.searchScenicSpot(searchTarget, id);
+        // let apiData: string;
 
-        switch (searchTarget) {
-            case 'ScenicSpotID':
-                apiData = `$filter=ScenicSpotID eq '${id}'`;
-                this.api.getScenicSpotList(apiData).subscribe(v => this.api.detailTarget.next(v));
-                break;
-            case 'RestaurantId':
-                apiData = `$filter=RestaurantID eq '${id}'`;
-                this.api.getRestaurantList(apiData).subscribe(v => this.api.detailTarget.next(v));
-                break;
-            case 'ActivityId':
-                apiData = `$filter=ActivityID eq '${id}'`;
-                this.api.getActivityList(apiData).subscribe(v => this.api.detailTarget.next(v));
-                break;
-        }
-        this.router.navigateByUrl('/detail')
+        // switch (searchTarget) {
+        //     case 'ScenicSpotID':
+        //         apiData = `$filter=ScenicSpotID eq '${id}'`;
+        //         this.api.getScenicSpotList(apiData).subscribe(v => this.api.detailTarget.next(v));
+        //         break;
+        //     case 'RestaurantId':
+        //         apiData = `$filter=RestaurantID eq '${id}'`;
+        //         this.api.getRestaurantList(apiData).subscribe(v => this.api.detailTarget.next(v));
+        //         break;
+        //     case 'ActivityId':
+        //         apiData = `$filter=ActivityID eq '${id}'`;
+        //         this.api.getActivityList(apiData).subscribe(v => this.api.detailTarget.next(v));
+        //         break;
+        // }
+        // this.router.navigateByUrl('/detail')
 
     }
 

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import jsSHA from 'jssha';
@@ -22,7 +23,7 @@ export class ApiRequestService {
     ActivitySubjects = ['節慶活動', '自行車活動', '遊憩活動', '產業文化活動', '年度活動', '四季活動'];
     RestaurantSubjects = ['地方特產', '中式美食', '甜點冰品', '異國料理', '伴手禮', '素食'];
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private router: Router) { }
 
     /*****************  EVENT *****************/
     /**
@@ -76,7 +77,27 @@ export class ApiRequestService {
         return this.GetMethod(`ScenicSpot?${data}`);
     }
 
+    searchScenicSpot(searchTarget: string, id: string) {
 
+        let apiData: string;
+
+        switch (searchTarget) {
+            case 'ScenicSpot':
+                apiData = `$filter=ScenicSpotID eq '${id}'`;
+                this.getScenicSpotList(apiData).subscribe(v => this.detailTarget.next(v));
+                break;
+            case 'Restaurant':
+                apiData = `$filter=RestaurantID eq '${id}'`;
+                this.getRestaurantList(apiData).subscribe(v => this.detailTarget.next(v));
+                break;
+            case 'Activity':
+                apiData = `$filter=ActivityID eq '${id}'`;
+                this.getActivityList(apiData).subscribe(v => this.detailTarget.next(v));
+                break;
+        }
+        this.router.navigateByUrl('/detail')
+
+    }
 
     /************** GET METHOD BASED *****************/
     /**
