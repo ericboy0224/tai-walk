@@ -1,0 +1,129 @@
+<article class="desktop-homepage">
+    <section class="desktop-homepage__search content-box">
+        <div class="desktop-homepage__search__title">
+            <div class="desktop-homepage__search__title__main">
+                <h1 style="position: relative; display: inline-block;" class="heading heading--primary">探索台灣之美 <span
+                        class="underline"></span></h1>
+                <h1 class="heading heading--primary">讓我們更親近這片土地</h1>
+            </div>
+            <div class="desktop-homepage__search__title__sub">
+                <div class="comment__search__main">
+                    <span><img src="../../../../assets/icons/spots/spot24_Y.svg"></span>
+                    <span>
+                        <p>台灣旅遊景點導覽</p>
+                    </span>
+                </div>
+                <div class="comment__search__sub">
+                    <span>
+                        <p>Taiwan Travel Guide</p>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="desktop-homepage__search__function">
+            <div class="desktop-homepage__search__function__item">
+                <app-select-form></app-select-form>
+            </div>
+            <div class="desktop-homepage__search__function__item">
+                <app-text-input></app-text-input>
+            </div>
+            <div class="desktop-homepage__search__function__item">
+                <app-search-button></app-search-button>
+            </div>
+        </div>
+    </section>
+    <div>
+        <section class="desktop-homepage__carousel content-box">
+            <div class="content-box__content">
+                <app-carousel [enable]="true" (searchCarousel)="searchScenicSpot('ScenicSpotID',$event)"
+                    [carouselInfos]="carouselInfos"></app-carousel>
+            </div>
+        </section>
+        <section class="content-box">
+            <div class="content-box__top">
+                <h2 class="heading heading--title">近期活動</h2>
+                <a class="comment__more" href="return false">
+                    <div class="comment__more__layout">查看更多活動 <mat-icon>chevron_right</mat-icon>
+                    </div>
+                </a>
+            </div>
+            <div class="content-box__content--col2-row2">
+                <mat-card *ngFor="let activity of activityInfos" class="event">
+                    <div class="event__photo">
+                        <img src="{{activity.picture.PictureUrl1}}" alt="{{activity.picture.PictureDescription1}}">
+                    </div>
+                    <div class="event__text">
+                        <div class="event__Text__top">
+                            <div class="event__text__date-range card-font__comment card-font">
+                                {{activity.start}} - {{activity.end}}
+                            </div>
+                            <h3 class="card-font__heading card-font event__name">
+                                {{activity.name}}
+                            </h3>
+                        </div>
+                        <div class="event__text__bottom" (click)="searchScenicSpot('ActivityId',activity.id)">
+                            <a href="javascript:void(0);" style="text-decoration: none;">
+                                <div class="spot-name">
+                                    <img src="../../../../assets/icons/spots/spot16.svg" alt="spot icon">
+                                    <p class="card-font card-font__comment">{{activity.city}}</p>
+                                </div>
+                                <div class="card-font card-font__comment">
+                                    <a (click)="searchScenicSpot('ActivityId',activity.id)"
+                                        class="comment__more event__more" style="color: #7F977B" href="javascript:void(0);">
+                                        <div class="comment__more__layout">詳細介紹 <mat-icon>chevron_right</mat-icon>
+                                        </div>
+                                    </a>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </section>
+        <section class="content-box scroll">
+            <div class="content-box__top">
+                <h2 class="heading heading--title">熱門打卡景點</h2>
+                <a class="comment__more" href="return false">
+                    <div class="comment__more__layout">查看更多景點 <mat-icon>chevron_right</mat-icon>
+                    </div>
+                </a>
+            </div>
+            <div class="content-box__content--col4-row1">
+                <ng-container *ngFor="let spot of hotSpotInfos">
+                    <app-spot-card (searchID)="searchScenicSpot('ScenicSpotID',spot.id);" [info]="spot"></app-spot-card>
+                </ng-container>
+            </div>
+        </section>
+        <section class="content-box scroll">
+            <div class="content-box__top">
+                <h2 class="heading heading--title">一再回訪美食</h2>
+                <a class="comment__more" href="return false">
+                    <div class="comment__more__layout">查看更多美食 <mat-icon>chevron_right</mat-icon>
+                    </div>
+                </a>
+            </div>
+            <div class="content-box__content--col4-row1">
+                <ng-container *ngFor="let restaurant of hotRestaurantInfos">
+                    <app-spot-card (searchID)="searchScenicSpot('RestaurantId',restaurant.id);" [info]="restaurant"></app-spot-card>
+                </ng-container>
+
+                <!-- <div class="spot-card" *ngFor="let restaurant of hotRestaurantInfos">
+                    <a (click)="searchScenicSpot('RestaurantId',restaurant.id);" style="text-decoration: none;"
+                    href="javascript:void(0);">
+                        <mat-card class="spot-card__img-container">
+                            <img src="{{restaurant.picture.PictureUrl1}}" alt="{{restaurant.picture.PictureDescription1}}">
+                        </mat-card>
+                        <h3 class="card-font__heading card-font spot-card__name">
+                            {{restaurant.name}}
+                        </h3>
+                        <div class="spot-name">
+                            <img src="../../../../assets/icons/spots/spot16.svg" alt="spot icon">
+                            <p class="card-font card-font__comment">{{restaurant.city}}</p>
+                        </div>
+                    </a>
+                </div> -->
+            </div>
+        </section>
+    </div>
+
+</article>

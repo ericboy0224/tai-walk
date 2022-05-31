@@ -1,0 +1,15 @@
+<div class="spot-card">
+    <a (click)="search()" style="text-decoration: none;"
+    href="javascript:void(0);">
+        <mat-card class="spot-card__img-container">
+            <img src="{{info.picture.PictureUrl1}}" alt="{{info.picture.PictureDescription1}}">
+        </mat-card>
+        <h3 class="card-font__heading card-font spot-card__name">
+            {{info.name}}
+        </h3>
+        <div class="spot-name">
+            <img src="../../../../assets/icons/spots/spot16.svg" alt="spot icon">
+            <p class="card-font card-font__comment">{{info.city}}</p>
+        </div>
+    </a>
+</div>

@@ -1,0 +1,33 @@
+<mat-stepper *ngIf="enable" class="carousel">
+    <mat-step *ngFor="let carousel of carouselInfos" class="carousel__step">
+        <mat-card class="carousel-card">
+            <div class="carousel__horizontal">
+                <button mat-mini-fab matStepperPrevious class="carousel__btn">
+                    <mat-icon>chevron_left</mat-icon>
+                </button>
+                <h2 *ngIf="enable" class="position-name">{{carousel.city}}&nbsp;|&nbsp;{{carousel.name}}</h2>
+                <button mat-mini-fab matStepperNext class="carousel__btn">
+                    <mat-icon>chevron_right</mat-icon>
+                </button>
+            </div>
+            <img (click)="search(carousel.id)" class="carousel__card__img" style="width: 100%;"
+                src="{{carousel.picture.PictureUrl1}}" alt="{{carousel.picture.PictureDescription1}}">
+        </mat-card>
+    </mat-step>
+</mat-stepper>
+<mat-stepper *ngIf="!enable" class="carousel">
+    <mat-step *ngFor="let carousel of carouselInfos" class="carousel__step">
+        <mat-card class="carousel-card">
+            <div class="carousel__horizontal">
+                <button mat-mini-fab matStepperPrevious class="carousel__btn">
+                    <mat-icon>chevron_left</mat-icon>
+                </button>
+                <button mat-mini-fab matStepperNext class="carousel__btn">
+                    <mat-icon>chevron_right</mat-icon>
+                </button>
+            </div>
+            <img (click)="search(carousel.id)" class="carousel__card__img" style="width: 100%;"
+                src="{{carousel.picture.PictureUrl1}}" alt="{{carousel.picture.PictureDescription1}}">
+        </mat-card>
+    </mat-step>
+</mat-stepper>

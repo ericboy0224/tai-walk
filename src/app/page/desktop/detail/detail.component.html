@@ -1,0 +1,181 @@
+<article class="desktop-detail">
+    <section class="desktop-detail__common__path">
+        <div class="path__container">
+            <div class="path__content">
+                <a href="javascript:void(0);">首頁</a>
+                <span class="slash">/</span>
+                <a href="javascript:void(0);">{{detailInfo.type}}</a>
+                <span class="slash">/</span>
+                <a href="javascript:void(0);">{{detailInfo.city}}</a>
+                <span class="slash">/</span>
+                <a href="javascript:void(0);">{{detailInfo.name}}</a>
+            </div>
+        </div>
+    </section>
+    <section class="desktop-detail__common__carousel">
+        <div class="carousel__container">
+            <app-carousel [enable]="false" [carouselInfos]="carouselInfos" class="carousel__content"></app-carousel>
+        </div>
+    </section>
+    <section class="desktop-detail__common__description">
+        <div class="description__container">
+            <div class="description__content">
+                <div class="description__content__heading--primary">
+                    <h1 class="heading">{{detailInfo.name}}</h1>
+                </div>
+                <div class="description__content__chip">
+                    <mat-chip-list class="chip__list">
+                        <mat-chip *ngFor="let class of detailInfo.classes" class="chip__item">
+                            <mat-chip-avatar class="chip__item__icon">#</mat-chip-avatar>
+                            <span class="chip__item__name">{{class}}</span>
+                        </mat-chip>
+                    </mat-chip-list>
+                </div>
+                <div class="description__content__heading--secondary">
+                    <h3 class="label">景點介紹：</h3>
+                </div>
+                <div class="description__content__detail">
+                    <p class="detail-intro">{{detailInfo.description}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="desktop-detail__common__info">
+        <div class="detail-cards__container">
+            <div class="detail-cards--left">
+                <div [ngSwitch]="getByValue(detailInfo.type)" class="detail-cards__info__content detail-cards__radius">
+                    <ul *ngSwitchCase="'ScenicSpot'" class="info-list">
+                        <li class="info-list__item">
+                            <h2 class="label">開放時間：</h2>
+                            <span class="info-list__item__content">{{detailInfo.openTime}}</span>
+                        </li>
+                        <li class="info-list__item">
+                            <h2 class="label">服務電話：</h2>
+                            <span class="info-list__item__content"><a href="tel:{{detailInfo.phone}}">{{detailInfo.phone}}</a></span>
+                        </li>
+                        <li class="info-list__item">
+                            <h2 class="label">景點地址：</h2>
+                            <span class="info-list__item__content"><a href="https://www.google.com/maps/place/{{detailInfo.position.PositionLat}},{{detailInfo.position.PositionLon}}">{{detailInfo.address || detailInfo.name}}</a></span>
+                        </li>
+                        <li class="info-list__item">
+                            <h2 class="label">官方網站：</h2>
+                            <span class="info-list__item__content"><a
+                                    href="{{detailInfo.websiteUrl}}">{{detailInfo.websiteUrl}}</a></span>
+                        </li>
+                        <li class="info-list__item">
+                            <h2 class="label">票價資訊：</h2>
+                            <span class="info-list__item__content">{{detailInfo.ticketInfo}}</span>
+                        </li>
+                        <li class="info-list__item">
+                            <h2 class="label">注意事項：</h2>
+                            <span class="info-list__item__content">{{detailInfo.remarks}}</span>
+                        </li>
+                    </ul>
+                    <ul *ngSwitchCase="'Restaurant'" class="info-list">
+                        <li class="info-list__item">
+                            <h2 class="label">營業時間：</h2>
+                            <span class="info-list__item__content">{{detailInfo.openTime}}</span>
+                        </li>
+                        <li class="info-list__item">
+                            <h2 class="label">聯絡電話：</h2>
+                            <span class="info-list__item__content"><a href="tel:{{detailInfo.phone}}">{{detailInfo.phone}}</a></span>
+                        </li>
+                        <li class="info-list__item">
+                            <h2 class="label">餐廳地址：</h2>
+                            <span class="info-list__item__content"><a href="https://www.google.com/maps/place/{{detailInfo.position.PositionLat}},{{detailInfo.position.PositionLon}}">{{detailInfo.address || detailInfo.name}}</a></span>
+                        </li>
+                        <li class="info-list__item">
+                            <h2 class="label">官方網站：</h2>
+                            <span class="info-list__item__content"><a
+                                    href="{{detailInfo.websiteUrl}}">{{detailInfo.websiteUrl}}</a></span>
+                        </li>
+                    </ul>
+                    <ul *ngSwitchCase="'Activity'" class="info-list">
+                        <li class="info-list__item">
+                            <h2 class="label">活動時間：</h2>
+                            <span class="info-list__item__content">{{commonCard.start}} ~ {{commonCard.end}}</span>
+                        </li>
+                        <li class="info-list__item">
+                            <h2 class="label">聯絡電話：</h2>
+                            <span class="info-list__item__content"><a href="tel:{{detailInfo.phone}}">{{detailInfo.phone}}</a></span>
+                        </li>
+                        <li class="info-list__item">
+                            <h2 class="label">主辦單位：</h2>
+                            <span class="info-list__item__content">{{detailInfo.organizer}}</span>
+                        </li>
+                        <li class="info-list__item">
+                            <h2 class="label">活動地點：</h2>
+                            <span class="info-list__item__content"><a href="https://www.google.com/maps/place/{{detailInfo.position.PositionLat}},{{detailInfo.position.PositionLon}}">{{detailInfo.address || detailInfo.name}}</a></span>
+                        </li>
+                        <li class="info-list__item">
+                            <h2 class="label">官方網站：</h2>
+                            <span class="info-list__item__content"><a
+                                    href="{{detailInfo.websiteUrl}}">{{detailInfo.websiteUrl}}</a></span>
+                        </li>
+                        <li class="info-list__item">
+                            <h2 class="label">注意事項：</h2>
+                            <span class="info-list__item__content">{{detailInfo.remarks}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="detail-cards--right">
+                <div class="detail-cards__map__container detail-cards__radius">
+                    <div class="detail-cards__map__content ">
+                        <div id="map" class="map detail-cards__radius"></div>
+                    </div>
+                </div>
+                <div class="detail-cards__surround__container">
+                    <div class="surround__container">
+                        <div class="surround__heading">
+                            <h2 class="label">周邊資訊：</h2>
+                        </div>
+                        <div class="surround__content">
+                            <a class="surround__item" href="javascript:void(0);">
+                                <div class="surround__item__icon">
+                                    <p class="icon-btn--scene icon-btn" alt="附近景點 icon"></p>
+                                </div>
+                                <div class="surround__item__name">
+                                    <p class="surround__font">附近景點</p>
+                                </div>
+
+                            </a>
+                            <a class="surround__item" href="javascript:void(0);">
+                                <div class="surround__item__icon">
+                                    <p class="icon-btn--event icon-btn" alt="附近活動 icon"></p>
+                                </div>
+                                <div class="surround__item__name">
+                                    <p class="surround__font">附近活動</p>
+                                </div>
+                            </a>
+                            <a class="surround__item" href="javascript:void(0);">
+                                <div class="surround__item__icon">
+                                </div>
+                                <p class="icon-btn--food icon-btn" alt="附近美食 icon"></p>
+                                <div class="surround__item__name">
+                                    <p class="surround__font">附近美食</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="desktop-detail__common__more">
+        <div class="more-spot__container">
+            <div class="more-spot__content">
+                <div class="spot-card__content__heading" [ngSwitch]="getByValue(detailInfo.type)">
+                    <h1 *ngSwitchCase="'ScenicSpot'" class="heading">還有這些不能錯過的景點</h1>
+                    <h1 *ngSwitchCase="'Restaurant'" class="heading">還有這些不能錯過的美食</h1>
+                    <h1 *ngSwitchCase="'Activity'" class="heading">還有這些不能錯過的活動</h1>
+                </div>
+                <div class="spot-card__content__cards">
+                    <ng-container *ngFor="let info of surroundList">
+                        <app-spot-card [info]="info"></app-spot-card>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </section>
+</article>
