@@ -35,8 +35,11 @@
     <div>
         <section class="desktop-homepage__carousel content-box">
             <div class="content-box__content">
-                <app-carousel [enable]="true" (searchCarousel)="searchScenicSpot('ScenicSpot',$event)"
-                    [carouselInfos]="carouselInfos"></app-carousel>
+                <a [routerLink]="['/detail']"
+                [queryParams]="{type:'ScenicSpot', id:carouselInfos[0].id}"
+                href="javascript:void(0);">
+                    <app-carousel [enable]="true" [carouselInfos]="carouselInfos"></app-carousel>
+                </a>
             </div>
         </section>
         <section class="content-box">
@@ -61,15 +64,16 @@
                                 {{activity.name}}
                             </h3>
                         </div>
-                        <div class="event__text__bottom" (click)="searchScenicSpot('Activity',activity.id)">
-                            <a href="javascript:void(0);" style="text-decoration: none;">
+                        <div class="event__text__bottom">
+                            <a [routerLink]="['/detail']" [queryParams]="{type:'Activity', id:activity.id}"
+                                href="javascript:void(0);" style="text-decoration: none;">
                                 <div class="spot-name">
                                     <img src="../../../../assets/icons/spots/spot16.svg" alt="spot icon">
                                     <p class="card-font card-font__comment">{{activity.city}}</p>
                                 </div>
                                 <div class="card-font card-font__comment">
-                                    <a (click)="searchScenicSpot('Activity',activity.id)"
-                                        class="comment__more event__more" style="color: #7F977B" href="javascript:void(0);">
+                                    <a class="comment__more event__more" style="color: #7F977B"
+                                        href="javascript:void(0);">
                                         <div class="comment__more__layout">詳細介紹 <mat-icon>chevron_right</mat-icon>
                                         </div>
                                     </a>
@@ -90,7 +94,11 @@
             </div>
             <div class="content-box__content--col4-row1">
                 <ng-container *ngFor="let spot of hotSpotInfos">
-                    <app-spot-card (searchID)="searchScenicSpot('ScenicSpot',spot.id);" [info]="spot"></app-spot-card>
+                    <a href="javascript:void(0);" [routerLink]="['/detail']"
+                        [queryParams]="{type:'ScenicSpot', id:spot.id}">
+                        <app-spot-card [info]="spot">
+                        </app-spot-card>
+                    </a>
                 </ng-container>
             </div>
         </section>
@@ -104,24 +112,11 @@
             </div>
             <div class="content-box__content--col4-row1">
                 <ng-container *ngFor="let restaurant of hotRestaurantInfos">
-                    <app-spot-card (searchID)="searchScenicSpot('Restaurant',restaurant.id);" [info]="restaurant"></app-spot-card>
-                </ng-container>
-
-                <!-- <div class="spot-card" *ngFor="let restaurant of hotRestaurantInfos">
-                    <a (click)="searchScenicSpot('RestaurantId',restaurant.id);" style="text-decoration: none;"
-                    href="javascript:void(0);">
-                        <mat-card class="spot-card__img-container">
-                            <img src="{{restaurant.picture.PictureUrl1}}" alt="{{restaurant.picture.PictureDescription1}}">
-                        </mat-card>
-                        <h3 class="card-font__heading card-font spot-card__name">
-                            {{restaurant.name}}
-                        </h3>
-                        <div class="spot-name">
-                            <img src="../../../../assets/icons/spots/spot16.svg" alt="spot icon">
-                            <p class="card-font card-font__comment">{{restaurant.city}}</p>
-                        </div>
+                    <a href="javascript:void(0);" [routerLink]="['/detail']"
+                        [queryParams]="{type:'Restaurant', id:restaurant.id}">
+                        <app-spot-card [info]="restaurant"></app-spot-card>
                     </a>
-                </div> -->
+                </ng-container>
             </div>
         </section>
     </div>

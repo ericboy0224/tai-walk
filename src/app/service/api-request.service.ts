@@ -74,28 +74,20 @@ export class ApiRequestService {
      * @description `data` 傳入語法 $filter=Picture/PictureUrl1 ne null&$top=4&$skip=5
      */
     public getScenicSpotList(data: any = '') {
+        console.log(data);
         return this.GetMethod(`ScenicSpot?${data}`);
     }
 
-    searchScenicSpot(searchTarget: string, id: string) {
+    methodRouting(type: string, id:string) {
+        const apiData = `$filter=${type}ID eq '${id}'`;
 
-        let apiData: string;
-
-        switch (searchTarget) {
-            case 'ScenicSpot':
-                apiData = `$filter=ScenicSpotID eq '${id}'`;
-                this.getScenicSpotList(apiData).subscribe(v => this.detailTarget.next(v));
-                break;
-            case 'Restaurant':
-                apiData = `$filter=RestaurantID eq '${id}'`;
-                this.getRestaurantList(apiData).subscribe(v => this.detailTarget.next(v));
-                break;
-            case 'Activity':
-                apiData = `$filter=ActivityID eq '${id}'`;
-                this.getActivityList(apiData).subscribe(v => this.detailTarget.next(v));
-                break;
+        if (type === 'ScenicSpot') {
+            return this.getScenicSpotList(apiData)
+        } else if (type === 'Restaurant') {
+            return this.getRestaurantList(apiData);
+        } else {
+            return this.getActivityList(apiData);
         }
-        this.router.navigateByUrl('/detail')
 
     }
 

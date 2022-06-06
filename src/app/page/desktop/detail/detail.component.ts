@@ -4,7 +4,7 @@ import { ApiRequestService } from './../../../service/api-request.service';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { DetailInfo } from 'src/app/model/detail-info.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -28,21 +28,24 @@ export class DetailComponent implements OnInit, AfterViewInit {
     surroundList: CommonCard[] = [];
     type: string = 'ScenicSpot';
 
-    constructor(private api: ApiRequestService, private router: Router) {
+    constructor(private api: ApiRequestService, private router: Router, private route: ActivatedRoute) {
 
     }
 
     ngOnInit(): void {
 
+
     }
 
     ngAfterViewInit(): void {
-        this.api.detailTarget.subscribe(t => {
-            this.source = t[0];
-            this.bindInfo(this.source);
-            this.initMap();
-            this.getSurroundSpot(this.detailInfo.position.PositionLat, this.detailInfo.position.PositionLon, CommonUtilitiesService.sourceType(this.source))
-            this.type = this.getByValue(this.detailInfo.type) || 'ScenicSpot';
+        this.route.queryParams.subscribe(params => {
+            this.api.methodRouting(params['type'], params['id']).subscribe((detailSource: any) => {
+                this.source = detailSource[0];
+                this.bindInfo(this.source);
+                this.initMap();
+                this.getSurroundSpot(this.detailInfo.position.PositionLat, this.detailInfo.position.PositionLon, CommonUtilitiesService.sourceType(this.source))
+                this.type = params['type'];
+            })
         });
     }
 
@@ -71,16 +74,10 @@ export class DetailComponent implements OnInit, AfterViewInit {
 
     private commonCardSetter(list: any) {
         this.surroundList = [];
-
-        list.forEach((s: any) => {
-            this.surroundList.push(CommonUtilitiesService.SetCommonCard(s));
-        });
-
-        console.log(this.surroundList);
+        this.surroundList = list.map((src: any) => CommonUtilitiesService.SetCommonCard(src));
     }
 
     private initMap(): void {
-        // console.log(this.detailInfo.position);
         this.map = L.map('map', {
             center: [this.detailInfo.position.PositionLat, this.detailInfo.position.PositionLon],
             zoom: 10
@@ -121,7 +118,6 @@ export class DetailComponent implements OnInit, AfterViewInit {
 
         this.detailInfo.type = <string>this.detailType.get(type);
         this.commonCard = CommonUtilitiesService.SetCommonCard(infoSource);
-        console.log(this.commonCard);
 
         this.detailInfo.name = this.commonCard.name;
         this.detailInfo.city = this.commonCard.city;
@@ -140,8 +136,6 @@ export class DetailComponent implements OnInit, AfterViewInit {
 
         this.setCarouselInfo(this.commonCard);
 
-        // console.log(this.detailInfo);
-
     }
 
     setCarouselInfo(carousel: any) {
@@ -156,7 +150,8 @@ export class DetailComponent implements OnInit, AfterViewInit {
         }
     }
 
-
-
-
+    refresh() {
+        this.ngAfterViewInit();
+        setTimeout(() => window.location.reload());
+    }
 }

@@ -51,11 +51,14 @@
                         </li>
                         <li class="info-list__item">
                             <h2 class="label">服務電話：</h2>
-                            <span class="info-list__item__content"><a href="tel:{{detailInfo.phone}}">{{detailInfo.phone}}</a></span>
+                            <span class="info-list__item__content"><a
+                                    href="tel:{{detailInfo.phone}}">{{detailInfo.phone}}</a></span>
                         </li>
                         <li class="info-list__item">
                             <h2 class="label">景點地址：</h2>
-                            <span class="info-list__item__content"><a href="https://www.google.com/maps/place/{{detailInfo.position.PositionLat}},{{detailInfo.position.PositionLon}}">{{detailInfo.address || detailInfo.name}}</a></span>
+                            <span class="info-list__item__content"><a
+                                    href="https://www.google.com/maps/place/{{detailInfo.position.PositionLat}},{{detailInfo.position.PositionLon}}">{{detailInfo.address
+                                    || detailInfo.name}}</a></span>
                         </li>
                         <li class="info-list__item">
                             <h2 class="label">官方網站：</h2>
@@ -78,11 +81,14 @@
                         </li>
                         <li class="info-list__item">
                             <h2 class="label">聯絡電話：</h2>
-                            <span class="info-list__item__content"><a href="tel:{{detailInfo.phone}}">{{detailInfo.phone}}</a></span>
+                            <span class="info-list__item__content"><a
+                                    href="tel:{{detailInfo.phone}}">{{detailInfo.phone}}</a></span>
                         </li>
                         <li class="info-list__item">
                             <h2 class="label">餐廳地址：</h2>
-                            <span class="info-list__item__content"><a href="https://www.google.com/maps/place/{{detailInfo.position.PositionLat}},{{detailInfo.position.PositionLon}}">{{detailInfo.address || detailInfo.name}}</a></span>
+                            <span class="info-list__item__content"><a
+                                    href="https://www.google.com/maps/place/{{detailInfo.position.PositionLat}},{{detailInfo.position.PositionLon}}">{{detailInfo.address
+                                    || detailInfo.name}}</a></span>
                         </li>
                         <li class="info-list__item">
                             <h2 class="label">官方網站：</h2>
@@ -97,7 +103,8 @@
                         </li>
                         <li class="info-list__item">
                             <h2 class="label">聯絡電話：</h2>
-                            <span class="info-list__item__content"><a href="tel:{{detailInfo.phone}}">{{detailInfo.phone}}</a></span>
+                            <span class="info-list__item__content"><a
+                                    href="tel:{{detailInfo.phone}}">{{detailInfo.phone}}</a></span>
                         </li>
                         <li class="info-list__item">
                             <h2 class="label">主辦單位：</h2>
@@ -105,7 +112,9 @@
                         </li>
                         <li class="info-list__item">
                             <h2 class="label">活動地點：</h2>
-                            <span class="info-list__item__content"><a href="https://www.google.com/maps/place/{{detailInfo.position.PositionLat}},{{detailInfo.position.PositionLon}}">{{detailInfo.address || detailInfo.name}}</a></span>
+                            <span class="info-list__item__content"><a
+                                    href="https://www.google.com/maps/place/{{detailInfo.position.PositionLat}},{{detailInfo.position.PositionLon}}">{{detailInfo.address
+                                    || detailInfo.name}}</a></span>
                         </li>
                         <li class="info-list__item">
                             <h2 class="label">官方網站：</h2>
@@ -172,7 +181,10 @@
                 </div>
                 <div class="spot-card__content__cards">
                     <ng-container *ngFor="let info of surroundList">
-                        <app-spot-card [info]="info"></app-spot-card>
+                        <a href="javascript:void(0);" [routerLink]="['/detail']" [queryParams]="{type:type, id:info.id
+                        }" (click)="refresh()">
+                            <app-spot-card [info]="info"></app-spot-card>
+                        </a>
                     </ng-container>
                 </div>
             </div>

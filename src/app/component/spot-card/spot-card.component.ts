@@ -8,14 +8,10 @@ import { CommonCard } from 'src/app/model/common-card.model';
 })
 export class SpotCardComponent implements OnInit {
     @Input() info: CommonCard = new CommonCard('', '', '', { PictureDescription1: '', PictureUrl1: '' }, '', '');
-    @Output() searchID = new EventEmitter<void>();
+
     constructor() { }
 
     ngOnInit(): void {
-    }
-
-    search() {
-        this.searchID.emit();
     }
 
 }
