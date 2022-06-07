@@ -74,7 +74,6 @@ export class ApiRequestService {
      * @description `data` 傳入語法 $filter=Picture/PictureUrl1 ne null&$top=4&$skip=5
      */
     public getScenicSpotList(data: any = '') {
-        console.log(data);
         return this.GetMethod(`ScenicSpot?${data}`);
     }
 
