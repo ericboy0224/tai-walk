@@ -1,20 +1,21 @@
 <div class="overlay" *ngIf="isOpen" (click)="isOpen = false"></div>
-<div class="desktop">
-    <header class="desktop__header">
-        <nav class="desktop__header__content">
-            <div class="desktop__header__content__logo--desktop">
-                <a routerLink="/home"><img src="../../../../assets/icons/logos/Logo-desktop.svg" alt="台灣走走的電腦 logo"></a>
+<div class="h-full relative top-0 left-0">
+    <header class="fixed top-0 left-0 w-full h-20 z-50 border-b border-grey-light bg-white">
+        <nav class="w-full h-full flex content-center justify-between px-11">
+            <div class="flex content-center justify-center">
+                <a class="max-h-8 m-auto" routerLink="/home"><img src="../../../../assets/icons/logos/Logo-desktop.svg"
+                        alt="台灣走走的電腦 logo"></a>
             </div>
-            <div class="desktop__header__content__logo--mobile">
+            <div class="hidden">
                 <a routerLink="/home"><img src="../../../../assets/icons/logos/Logo-mobile.svg" alt="台灣走走的手機 logo"></a>
             </div>
-            <ul class="desktop__header__content__menu--desktop">
-                <li class="desktop__header__content__menu--desktop__item"><a href="#">探索景點</a></li>
-                <li class="desktop__header__content__menu--desktop__item"><a href="#">節慶活動</a></li>
-                <li class="desktop__header__content__menu--desktop__item"><a href="#">品嚐美食</a></li>
+            <ul class="flex content-center font-sans">
+                <li class="m-auto text-lg font-400 text-grey mr-5 "><a href="#">探索景點</a></li>
+                <li class="m-auto text-lg font-400 text-grey mr-5 "><a href="#">節慶活動</a></li>
+                <li class="m-auto text-lg font-400 text-grey  "><a href="#">品嚐美食</a></li>
             </ul>
         </nav>
-        <a href="javascript:void(0);" class="desktop__header__content__menu--mobile" (click)="isOpen = !isOpen"
+        <a href="javascript:void(0);" class="hidden" (click)="isOpen = !isOpen"
             type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
             <span class="line line--half"></span>
             <span class="line line--full"></span>
@@ -38,10 +39,10 @@
         </ng-template>
 
     </header>
-    <main class="desktop__content">
+    <main class="max-w-[1200px] m-auto px-11 mt-[162.5px]">
         <router-outlet></router-outlet>
     </main>
-    <footer class="desktop__footer">
+    <footer class="absolute bottom-0 w-full py-5 text-sm text-center text-white bg-green-light">
         #The F2E 3rd, Week-1. Developed by #Eric Lin. Designed by #Breakfast. #Tai-Walk.
     </footer>
 </div>

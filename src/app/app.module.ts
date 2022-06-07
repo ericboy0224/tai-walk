@@ -23,6 +23,7 @@ import { DetailComponent } from './page/desktop/detail/detail.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { SpotCardComponent } from './component/spot-card/spot-card.component';
 import {OverlayModule} from '@angular/cdk/overlay';
+import { DiscoverComponent } from './page/discover/discover.component';
 
 @NgModule({
     declarations: [
@@ -35,6 +36,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
         CarouselComponent,
         DetailComponent,
         SpotCardComponent,
+        DiscoverComponent,
 
 
     ],

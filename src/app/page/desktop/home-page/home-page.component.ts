@@ -1,7 +1,7 @@
 import { CommonUtilitiesService } from '../../../service/common-utilities.service';
 import { ApiRequestService } from './../../../service/api-request.service';
 import { Component, OnInit } from '@angular/core';
-import { forkJoin, from, map, of } from 'rxjs';
+import { forkJoin, from } from 'rxjs';
 import { CommonCard } from 'src/app/model/common-card.model';
 import { Router } from '@angular/router';
 
@@ -18,6 +18,23 @@ export class HomePageComponent implements OnInit {
     hotSpotInfos: CommonCard[] = [];
     hotRestaurantInfos: CommonCard[] = [];
 
+    searchDropdown: boolean = false;
+
+    type = new Map([
+        ['ScenicSpot', '探索景點'],
+        ['Activity', '節慶活動'],
+        ['Restaurant', '品嚐美食'],
+    ]);
+
+    searchOptions: {
+        type: 'ScenicSpot' | 'Restaurant' | 'Activity',
+        keyword: string
+    } = {
+            type: 'ScenicSpot',
+            keyword: ''
+        };
+
+
     constructor(private api: ApiRequestService, private router: Router) { }
 
     ngOnInit(): void {
@@ -28,6 +45,10 @@ export class HomePageComponent implements OnInit {
     }
 
 
+    changeSearchType(typeInEng: 'ScenicSpot' | 'Restaurant' | 'Activity') {
+        this.searchOptions.type = typeInEng;
+        this.searchDropdown = false;
+    }
 
     /***********  ACTIVITY  *****************/
     getActivitySpotList() {

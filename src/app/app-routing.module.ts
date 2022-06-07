@@ -1,3 +1,4 @@
+import { DiscoverComponent } from './page/discover/discover.component';
 import { DetailComponent } from './page/desktop/detail/detail.component';
 
 import { HomePageComponent } from './page/desktop/home-page/home-page.component';
@@ -7,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
     { path: 'home', component: HomePageComponent },
     { path: 'detail', component: DetailComponent },
+    { path: 'discover', component: DiscoverComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
