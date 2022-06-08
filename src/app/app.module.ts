@@ -24,6 +24,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import { SpotCardComponent } from './component/spot-card/spot-card.component';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { DiscoverComponent } from './page/discover/discover.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -54,7 +55,8 @@ import { DiscoverComponent } from './page/discover/discover.component';
         LayoutModule,
         HttpClientModule,
         MatChipsModule,
-        OverlayModule
+        OverlayModule,
+        FormsModule
     ],
     providers: [],
     bootstrap: [AppComponent]

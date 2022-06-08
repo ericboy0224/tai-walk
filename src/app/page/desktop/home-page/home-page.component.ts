@@ -44,6 +44,10 @@ export class HomePageComponent implements OnInit {
         this.getCardSpotList('getRestaurantList', this.hotRestaurantInfos);
     }
 
+    search(){
+        console.log(this.searchOptions);
+    }
+
 
     changeSearchType(typeInEng: 'ScenicSpot' | 'Restaurant' | 'Activity') {
         this.searchOptions.type = typeInEng;
