@@ -1,26 +1,32 @@
-import {  Component, EventEmitter, Input,  OnInit, Output } from '@angular/core';
-import { CommonCard } from 'src/app/model/common-card.model';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 
 @Component({
     selector: 'app-carousel',
     templateUrl: './carousel.component.html',
     styleUrls: ['./carousel.component.scss']
 })
-export class CarouselComponent implements OnInit {
-    @Input('carouselInfos') carouselInfos: CommonCard[] = [];
-    @Output() searchCarousel = new EventEmitter<string>();
+export class CarouselComponent implements OnInit, AfterViewInit {
+    @Input('carouselInfos') carouselInfos:any;
 
-    @Input() enable: boolean = true;
+    prev: any;
+    current: any;
+    next: any;
 
-    pictures: any[] = [];
-
-    constructor() { }
+    constructor() {
+    }
 
     ngOnInit(): void {
     }
 
-    search(id: string) {
-        if (this.enable) this.searchCarousel.emit(id);
+    ngAfterViewInit(): void {
+        //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+        //Add 'implements AfterViewInit' to the class.
+
+        setTimeout(() => {
+        console.log(this.carouselInfos);
+
+        }, 100);
+
     }
 
 }

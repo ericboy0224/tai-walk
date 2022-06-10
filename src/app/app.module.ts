@@ -16,7 +16,6 @@ import {MatCardModule} from '@angular/material/card';
 import { SearchButtonComponent } from './component/search-button/search-button.component';
 import { TextInputComponent } from './component/text-input/text-input.component';
 import { SelectFormComponent } from './component/select-form/select-form.component';
-import { CarouselComponent } from './component/carousel/carousel.component';
 import {LayoutModule} from '@angular/cdk/layout';
 import { HttpClientModule } from  '@angular/common/http';
 import { DetailComponent } from './page/desktop/detail/detail.component';
@@ -25,6 +24,7 @@ import { SpotCardComponent } from './component/spot-card/spot-card.component';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { DiscoverComponent } from './page/discover/discover.component';
 import { FormsModule } from '@angular/forms';
+import { CarouselComponent } from './component/carousel/carousel.component';
 
 @NgModule({
     declarations: [
@@ -34,10 +34,10 @@ import { FormsModule } from '@angular/forms';
         SearchButtonComponent,
         TextInputComponent,
         SelectFormComponent,
-        CarouselComponent,
         DetailComponent,
         SpotCardComponent,
         DiscoverComponent,
+        CarouselComponent
 
 
     ],

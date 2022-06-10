@@ -104,6 +104,7 @@ export class HomePageComponent implements OnInit {
         }
 
         this.scenicBased(specials, this.carouselInfos);
+
     }
 
     /************  SCENIC ****************/
@@ -118,4 +119,5 @@ export class HomePageComponent implements OnInit {
             })
         })
     }
+
 }
