@@ -19,11 +19,21 @@ module.exports = {
                     'border': '#E6E6E6',
                     'light': '#E5E5E5',
                     'hint': '#9E9E9E',
+                    'background': '#F9F9F9',
                     DEFAULT: '#646464'
                 },
+                'carousel-btn': {
+                    'hover': 'rgba(255, 255, 255, 0.2)',
+                    DEFAULT: 'transparent'
+                },
+                'orange': {
+                    DEFAULT: '#FF725E'
+                }
             },
             fontFamily: {
-                'display': 'Playfair Display'
+                'display': 'Playfair Display',
+                'tc': 'Noto Sans TC'
+
             }
         },
     },

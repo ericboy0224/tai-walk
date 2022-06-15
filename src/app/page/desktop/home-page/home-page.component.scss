@@ -1,0 +1,8 @@
+.hover-event {
+    &:hover {
+        &> div >img {
+            transform: scale(1.1);
+        }
+    }
+
+}
