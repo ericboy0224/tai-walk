@@ -2,7 +2,7 @@ export class DetailInfo {
     type: string = '';
     city: string = '';
     name: string = '';
-    classes: string[] = [];
+    classes: any = [];
     description: string = '尚未提供';
     openTime?: string;
     phone: string = '尚未提供';

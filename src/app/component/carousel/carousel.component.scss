@@ -1,5 +1,10 @@
 .indicator-focused {
-    width: 20px;
-    height: 20px;
+    width: 9px;
+    height: 10px;
     background-color: #fff;
+
+    @media screen and (min-width:768px) {
+        width: 20px;
+        height: 20px;
+    }
 }

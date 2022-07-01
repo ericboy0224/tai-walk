@@ -4,7 +4,7 @@ import { ApiRequestService } from './../../../service/api-request.service';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { DetailInfo } from 'src/app/model/detail-info.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -28,14 +28,15 @@ export class DetailComponent implements OnInit, AfterViewInit {
     surroundList: CommonCard[] = [];
     type: string = 'ScenicSpot';
 
-    constructor(private api: ApiRequestService, private router: Router, private route: ActivatedRoute) {
-
+    carouselOption = {
+        nameVisible: false,
+        autoPlay: false,
+        interval: 3000,
     }
 
-    ngOnInit(): void {
+    constructor(private api: ApiRequestService, private route: ActivatedRoute) { }
 
-
-    }
+    ngOnInit(): void { }
 
     ngAfterViewInit(): void {
         this.route.queryParams.subscribe(params => {
@@ -125,7 +126,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
 
         this.detailInfo.description = description || Description;
         this.detailInfo.address = address;
-        this.detailInfo.classes = [Class, Class1, Class2, Class3].filter(Boolean);
+        this.detailInfo.classes = new Set([Class, Class1, Class2, Class3].filter(Boolean));
         this.detailInfo.position = position;
         this.detailInfo.openTime = openTime;
         if (phone) this.detailInfo.phone = phone;
@@ -135,14 +136,14 @@ export class DetailComponent implements OnInit, AfterViewInit {
         if (organizer) this.detailInfo.organizer = organizer;
 
         this.setCarouselInfo(this.commonCard);
-
     }
 
     setCarouselInfo(carousel: any) {
         this.carouselInfos = [];
         for (let i = 0; i < 3; i++) {
             if (carousel.picture.hasOwnProperty(`PictureUrl${i + 1}`)) {
-                const obj = new CommonCard('', '', '', { PictureUrl1: '', PictureDescription1: '', }, '', '');
+                const obj = new CommonCard('', '', '', '', { PictureUrl1: '', PictureDescription1: '', }, '', '');
+
                 obj.picture.PictureUrl1 = carousel.picture[`PictureUrl${i + 1}`];
                 obj.picture.PictureDescription1 = carousel.picture[`PictureDescription${i + 1}`];
                 this.carouselInfos.push(obj);

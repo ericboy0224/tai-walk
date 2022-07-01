@@ -51,7 +51,7 @@ export class CommonUtilitiesService {
 
         if (!ct) ct = getCityName(source.Address);
 
-        result = new CommonCard(id, ct, name, pic, start, end);
+        result = new CommonCard(sourceType, id, ct, name, pic, start, end);
 
         return result;
 

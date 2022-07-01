@@ -1,141 +1,113 @@
-<article class="w-full">
-    <section class="w-full flex items-center justify-between mb-14 px-24">
-        <div class="flex flex-col">
-            <div class="flex flex-col font-light text-black-700 leading-[70px] mb-6">
-                <h1 class="text-5xl my-5">探索台灣之美 <span class="underline"></span></h1>
-                <h1 class="text-5xl">讓我們更親近這片土地</h1>
+<section class="w-full px-[15px] overflow-hidden">
+    <section class="w-full flex flex-col items-center mb-[38px] tablet:mb-14  px-7 tablet:px-24  laptop:flex-row laptop:justify-between">
+        <div class="flex flex-col items-center justify-center laptop:items-start mb-5 laptop:mb-0">
+            <div class="font-light text-black-700 leading-10 tablet:leading-[70px] tablet:mb-6 relative">
+                <h1 class="text-[28px] tablet:text-5xl mt-[6px] tablet:mb-5 relative max-w-fit m-auto laptop:mx-0">
+                    探索台灣之美
+                    <div
+                        class="text-transparent text-[28px] tablet:text-5xl my-5 mb-2 underline underline-offset-8 decoration-2 decoration-green-decoration absolute -top-5 right-0">
+                        台灣之美</div>
+                </h1>
+                <h1 class="text-[28px] text-center tablet:text-5xl laptop:text-left">讓我們更親近這片土地</h1>
             </div>
             <div class="flex justify-start items-center">
-                <div class="flex items-center mr-2 ">
-                    <span><img src="../../../../assets/icons/spots/spot24_Y.svg"></span>
+                <div class="flex items-center">
+                    <figure>
+                        <img src="../../../../assets/icons/spots/spot24_Y.svg">
+                    </figure>
                     <span>
-                        <p class="text-xl text-grey font-normal leading-[29px]">台灣旅遊景點導覽</p>
+                        <p class="text-sm tablet:text-xl text-grey font-normal leading-[29px]">台灣旅遊景點導覽</p>
                     </span>
                 </div>
-                <div class="">
+                <div>
                     <span>
-                        <p class="text-lg text-grey font-display font-bold leading-[24px]">Taiwan Travel Guide</p>
+                        <p class="text-xs tablet:text-lg text-grey font-display font-bold leading-[24px]">Taiwan Travel
+                            Guide</p>
                     </span>
                 </div>
             </div>
         </div>
-        <div class="max-w-[350px] w-full h-full flex flex-col justify-end">
-            <div class="w-full h-[50px] mb-[7px] relative inline-block">
-                <div
-                    class="w-full h-full flex items-center justify-between bg-white border-solid border rounded-[5px] border-grey-border">
-                    <p class="ml-[30px] not-italic font-medium text-base text-green-dark">
-                        {{type.get(searchOptions.type)}}</p>
-                    <a href="javascript:void(0);" (click)="searchDropdown=!searchDropdown" class="mr-6">
-                        <img *ngIf="!searchDropdown" src="../../../../assets/icons/arrows/arrow-down16.svg"
-                            alt="向下展開箭頭">
-                        <img *ngIf="searchDropdown" src="../../../../assets/icons/arrows/arrow-up16.svg"
-                            alt="向上展開箭頭"></a>
-                </div>
-                <ul *ngIf="searchDropdown" (blur)="searchDropdown = false"
-                    class="absolute mt-[7px] z-10 w-[350px] h-[150px] border rounded-md bg-white list-none">
-                    <li class="hover:bg-green-hover flex items-center h-1/3 w-full border-b"><a
-                            class="w-full py-3 ml-[30px] font-normal font-base text-black-300"
-                            href="javascript:void(0);" (click)="changeSearchType('ScenicSpot')">探索景點</a></li>
-                    <li class="hover:bg-green-hover flex items-center h-1/3 w-full border-b"><a
-                            class="w-full py-3 ml-[30px] font-normal font-base text-black-300"
-                            href="javascript:void(0);" (click)="changeSearchType('Activity')">節慶活動</a></li>
-                    <li class="hover:bg-green-hover flex items-center h-1/3 w-full"><a
-                            class="w-full py-3 ml-[30px] font-normal font-base text-black-300"
-                            href="javascript:void(0);" (click)="changeSearchType('Restaurant')">品嚐美食</a></li>
-                </ul>
-            </div>
-            <div class="w-full h-[50px] mb-[7px]">
-                <input
-                    class="w-full h-full flex items-center justify-between bg-white border-solid border rounded-[5px] border-grey-border px-[30px] font-normal font-base text-black-300 focus:outline-none"
-                    type="text" [(ngModel)]="searchOptions.keyword" placeholder="你想去哪裡？請輸入關鍵字">
-            </div>
-            <div class="w-full h-[50px]">
-                <button (click)="search()"
-                    class="w-full h-full flex justify-center items-center bg-green hover:bg-green-light rounded-[5px]">
-                    <div class="flex items-center">
-                        <img class="inline-block" src="../../../../assets/icons/misc/search30.svg" alt="搜尋圖示">
-                        &nbsp;
-                        <span class="text-normal text-base text-white m-auto">
-                            搜 &nbsp; &nbsp; &nbsp; 尋</span>
-                    </div>
-                </button>
-            </div>
+        <div class="w-full max-w-[350px]">
+            <app-search-group></app-search-group>
         </div>
     </section>
-    <section class="w-full mb-9">
-        <div class="w-full">
+    <section class="w-full mb-6 tablet:mb-9">
+        <article class="w-full">
             <app-carousel [carouselInfos]="carouselInfos"></app-carousel>
-        </div>
+        </article>
     </section>
     <section class="w-full mb-9 flex flex-col">
-        <div class="pl-[15px] mb-3 flex items-center">
-            <h2 class="text-4xl text-black-700 font-light mr-auto">近期活動</h2>
-            <a class="no-underline" href="return false">
+        <div class="pl-1 tablet:pl-[15px] mb-3 flex items-center">
+            <h2 class="text-2xl tablet:text-4xl text-black-700 font-light mr-auto">近期活動</h2>
+            <a class="no-underline" href="javascript:void(0);">
                 <div class="flex items-center text-orange">查看更多活動 <mat-icon>chevron_right</mat-icon>
                 </div>
             </a>
         </div>
-        <div class="w-full grid grid-cols-2 gap-x-[30px] gap-y-3">
-            <div *ngFor="let activity of activityInfos" class="h-40 bg-grey-background border border-grey-light rounded-xl overflow-hidden">
-                <a href="javascript:void(0);" class="w-full h-full no-underline flex hover-event">
-                    <div class="h-full flex-[0_1_160px] border border-grey-light overflow-hidden">
-                        <img src="{{activity.picture.PictureUrl1}}" alt="{{activity.picture.PictureDescription1}}" class="w-full h-full transition-all">
+        <div class="w-full grid grid-rows-4 laptop:grid-rows-none laptop:grid-cols-2 gap-x-[30px] gap-y-3">
+            <article *ngFor="let activity of activityInfos"
+                class="h-[62px] tablet:h-40 bg-transparent tablet:bg-grey-background tablet:border tablet:border-grey-light rounded-xl overflow-hidden">
+                <a [routerLink]="['/detail']" [queryParams]="{type:activity.type, id:activity.id}"
+                    class="w-full h-full no-underline flex hover-event">
+                    <div
+                        class="flex-[0_0_90px] tablet:flex-[0_0_160px] border border-grey-light overflow-hidden rounded-laptop">
+                        <img src="{{activity.picture.PictureUrl1}}"
+                            onerror="this.src='../../../../assets/error/NoImage-255x200.png'"
+                            alt="{{activity.picture.PictureDescription1}}" class="w-full h-full transition-all">
                     </div>
-                    <div class="flex-1 flex flex-col px-[30px] pt-4 pb-[18px]">
-                        <div class="text-grey font-normal mb-[3px]">{{activity.start}} - {{activity.end}}</div>
-                        <div class="w-full h-[60px] text-[22px] leading-8 font-bold mb-[17px]">
+                    <div class="flex-1 flex flex-col pl-4 pr-12 pb-[3px] tablet:px-[30px] tablet:pt-4 tablet:pb-[18px]">
+                        <div class="text-grey text-xs tablet:text-base font-normal mb-[3px]">{{activity.start}} -
+                            {{activity.end}}</div>
+                        <div
+                            class="w-full h-[22px] tablet:h-[60px] text-[15px] tablet:text-[22px] leading-8 font-bold mb-[1px] tablet:mb-[17px]">
                             {{activity.name}}
                         </div>
                         <div class="flex justify-between items-center">
                             <div class="flex items-center text-grey">
-                                <img src="../../../../assets/icons/spots/spot16.svg" alt="景點圖示" class="mr-1">
-                                <p class="text-base">{{activity.city}}</p>
+                                <img src="../../../../assets/icons/spots/spot16.svg" alt="景點圖示"
+                                    class="hidden tablet:block mr-1">
+                                <p class="text-[11px] tablet:text-base">{{activity.city}}</p>
                             </div>
-                            <div class="flex items-center">
+                            <div class="hidden tablet:flex items-center">
                                 <p class="text-base text-green">詳細介紹</p>
                                 <img src="../../../../assets/icons/arrows/arrow-right16_G.svg" alt="詳細介紹圖示">
                             </div>
                         </div>
                     </div>
                 </a>
+            </article>
+        </div>
+    </section>
+    <section class="w-full mb-9 overflow-hidden max-w-[1110px]">
+        <div class="pl-1 tablet:pl-[15px] mb-3 flex items-center">
+            <h2 class="text-2xl tablet:text-4xl text-black-700 font-light mr-auto">熱門打卡景點</h2>
+            <a class="no-underline" href="javascript:void(0);">
+                <div class="flex items-center text-orange">查看更多景點 <mat-icon>chevron_right</mat-icon>
+                </div>
+            </a>
+        </div>
+        <div class="w-full overflow-x-scroll">
+            <div class="w-[928px] laptop:w-[1110px] flex items-center space-x-[30px] laptop:space-x-0 laptop:justify-between">
+                <section class="w-[220px] tablet:w-[255px]" *ngFor="let spot of hotSpotInfos">
+                    <app-spot-card [datum]="spot"></app-spot-card>
+                </section>
             </div>
         </div>
-
     </section>
-    <section class="content-box scroll">
-        <div class="content-box__top">
-            <h2 class="heading heading--title">熱門打卡景點</h2>
-            <a class="comment__more" href="return false">
-                <div class="comment__more__layout">查看更多景點 <mat-icon>chevron_right</mat-icon>
+    <section class="w-full overflow-hidden">
+        <div class="pl-1 tablet:pl-[15px] mb-3 flex items-center">
+            <h2 class="text-2xl tablet:text-4xl text-black-700 font-light mr-auto">一再回訪美食</h2>
+            <a class="no-underline" href="javascript:void(0);">
+                <div class="flex items-center text-orange">查看更多美食<mat-icon>chevron_right</mat-icon>
                 </div>
             </a>
         </div>
-        <div class="content-box__content--col4-row1">
-            <ng-container *ngFor="let spot of hotSpotInfos">
-                <a href="javascript:void(0);" [routerLink]="['/detail']"
-                    [queryParams]="{type:'ScenicSpot', id:spot.id}">
-                    <app-spot-card [info]="spot">
-                    </app-spot-card>
-                </a>
-            </ng-container>
+        <div class="w-full overflow-x-scroll">
+            <div class="w-[928px] laptop:w-[1110px] flex items-center space-x-[30px]">
+                <section class="w-[220px] tablet:w-[255px]" *ngFor="let spot of hotRestaurantInfos">
+                    <app-spot-card [datum]="spot"></app-spot-card>
+                </section>
+            </div>
         </div>
     </section>
-    <section class="content-box scroll">
-        <div class="content-box__top">
-            <h2 class="heading heading--title">一再回訪美食</h2>
-            <a class="comment__more" href="return false">
-                <div class="comment__more__layout">查看更多美食 <mat-icon>chevron_right</mat-icon>
-                </div>
-            </a>
-        </div>
-        <div class="content-box__content--col4-row1">
-            <ng-container *ngFor="let restaurant of hotRestaurantInfos">
-                <a href="javascript:void(0);" [routerLink]="['/detail']"
-                    [queryParams]="{type:'Restaurant', id:restaurant.id}">
-                    <app-spot-card [info]="restaurant"></app-spot-card>
-                </a>
-            </ng-container>
-        </div>
-    </section>
-
-</article>
+</section>

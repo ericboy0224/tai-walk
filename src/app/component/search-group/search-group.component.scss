@@ -1,0 +1,16 @@
+[type="date"] {
+    // background: #fff url(../../../assets/icons/misc/datepicker16.svg) 97% 50% no-repeat;
+
+    outline: none;
+}
+
+[type="date"]::-webkit-inner-spin-button {
+
+    display: none;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
+    background: #fff url(../../../assets/icons/misc/datepicker16.svg) 97% 50% no-repeat;
+
+
+}

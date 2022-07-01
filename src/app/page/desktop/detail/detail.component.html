@@ -1,191 +1,205 @@
-<article class="desktop-detail">
-    <section class="desktop-detail__common__path">
-        <div class="path__container">
-            <div class="path__content">
-                <a href="javascript:void(0);">首頁</a>
-                <span class="slash">/</span>
-                <a href="javascript:void(0);">{{detailInfo.type}}</a>
-                <span class="slash">/</span>
-                <a href="javascript:void(0);">{{detailInfo.city}}</a>
-                <span class="slash">/</span>
-                <a href="javascript:void(0);">{{detailInfo.name}}</a>
+<article class="w-full h-full">
+    <section class="w-full pt-[24px] mb-4 md:mb-[30px] px-[15px] md:px-[45px]">
+        <nav class="w-full text-xs md:text-base">
+            <ol class="list-none flex">
+                <li><a routerLink="/home" class="text-green-dark">首頁</a></li>
+                <li><span class="text-grey mx-2">/</span></li>
+                <li><a href="javascript:void(0);" class="text-green-dark">{{detailInfo.type}}</a></li>
+                <li><span class="text-grey mx-2">/</span></li>
+                <li><a href="javascript:void(0);" class="text-green-dark">{{detailInfo.city}}</a></li>
+                <li><span class="text-grey mx-2">/</span></li>
+                <li class="text-grey">{{detailInfo.name}}</li>
+            </ol>
+        </nav>
+    </section>
+    <section class="w-full mb-4 md:mb-[30px] px-[15px] md:px-[45px]">
+        <div class="w-full">
+            <app-carousel [carouselInfos]="carouselInfos" [option]="carouselOption"></app-carousel>
+        </div>
+    </section>
+    <section class="w-full mb-[30px] md:mb-[60px] px-[19px] md:px-[60px]">
+        <div class="flex flex-col">
+            <div class="mb-[10px] md:mb-[15.5px]">
+                <h1 class="text-2xl md:text-4xl text-black-700 font-light">{{detailInfo.name}}</h1>
+            </div>
+            <div class="flex flex-wrap items-center space-x-2 mb-[18px] md:mb-[33.5px]">
+                <div *ngFor="let class of detailInfo.classes"
+                    class="px-2 py-1 md:px-3 flex items-center justify-center text-sm md:text-xl text-gold rounded-full border border-gold">
+                    <span>#</span>
+                    <span>{{class}}</span>
+                </div>
+            </div>
+            <div class="mb-2 md:mb-[10px]">
+                <h3 class="text-lg md:text-xl text-black-300 font-medium md:font-bold">景點介紹：</h3>
+            </div>
+            <div class="text-base md:text-lg text-black-700 font-light text-justify">
+                {{detailInfo.description}}
             </div>
         </div>
     </section>
-    <section class="desktop-detail__common__carousel">
-        <div class="carousel__container">
-        </div>
-    </section>
-    <section class="desktop-detail__common__description">
-        <div class="description__container">
-            <div class="description__content">
-                <div class="description__content__heading--primary">
-                    <h1 class="heading">{{detailInfo.name}}</h1>
-                </div>
-                <div class="description__content__chip">
-                    <mat-chip-list class="chip__list">
-                        <mat-chip *ngFor="let class of detailInfo.classes" class="chip__item">
-                            <mat-chip-avatar class="chip__item__icon">#</mat-chip-avatar>
-                            <span class="chip__item__name">{{class}}</span>
-                        </mat-chip>
-                    </mat-chip-list>
-                </div>
-                <div class="description__content__heading--secondary">
-                    <h3 class="label">景點介紹：</h3>
-                </div>
-                <div class="description__content__detail">
-                    <p class="detail-intro">{{detailInfo.description}}</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="desktop-detail__common__info">
-        <div class="detail-cards__container">
-            <div class="detail-cards--left">
-                <div [ngSwitch]="getByValue(detailInfo.type)" class="detail-cards__info__content detail-cards__radius">
-                    <ul *ngSwitchCase="'ScenicSpot'" class="info-list">
-                        <li class="info-list__item">
-                            <h2 class="label">開放時間：</h2>
-                            <span class="info-list__item__content">{{detailInfo.openTime}}</span>
+    <section class="mb-[60px] bg-grey-background lg:bg-transparent w-full lg:px-[45px]">
+        <div
+            class="w-full px-[15px] lg:px-0 py-[30px] flex flex-wrap flex-col lg:flex-row lg:flex-nowrap items-center lg:items-start lg:space-x-5">
+            <div class="w-full lg:p-[30px] lg:pb-[60px] mb-[30px] lg:bg-grey-background lg:rounded-xl">
+                <div [ngSwitch]="getByValue(detailInfo.type)" class="w-full h-auto">
+                    <ul *ngSwitchCase="'ScenicSpot'" class="w-full list-none flex flex-col">
+                        <li class="mb-2 lg:mb-3 flex ">
+                            <h2 class="text-lg lg:text-xl text-black-700 font-bold flex-[0_0_100px]">開放時間：</h2>
+                            <span class="text-base lg:text-lg text-black-700 font-normal">{{detailInfo.openTime}}</span>
                         </li>
-                        <li class="info-list__item">
-                            <h2 class="label">服務電話：</h2>
-                            <span class="info-list__item__content"><a
+                        <li class="mb-2 lg:mb-3 flex  items-center">
+                            <h2 class="text-lg lg:text-xl text-black-700 font-bold flex-[0_0_100px]">服務電話：</h2>
+                            <span class="text-base lg:text-lg text-black-700 font-normal"><a
                                     href="tel:{{detailInfo.phone}}">{{detailInfo.phone}}</a></span>
                         </li>
-                        <li class="info-list__item">
-                            <h2 class="label">景點地址：</h2>
-                            <span class="info-list__item__content"><a
+                        <li class="mb-2 lg:mb-3 flex  items-center">
+                            <h2 class="text-lg lg:text-xl text-black-700 font-bold flex-[0_0_100px]">景點地址：</h2>
+                            <span class="text-base lg:text-lg text-black-700 font-normal"><a
                                     href="https://www.google.com/maps/place/{{detailInfo.position.PositionLat}},{{detailInfo.position.PositionLon}}">{{detailInfo.address
                                     || detailInfo.name}}</a></span>
                         </li>
-                        <li class="info-list__item">
-                            <h2 class="label">官方網站：</h2>
-                            <span class="info-list__item__content"><a
+                        <li class="mb-2 lg:mb-3 flex  items-center">
+                            <h2 class="text-lg lg:text-xl text-black-700 font-bold flex-[0_0_100px]">官方網站：</h2>
+                            <span class="text-base lg:text-lg text-black-700 font-normal"><a
                                     href="{{detailInfo.websiteUrl}}">{{detailInfo.websiteUrl}}</a></span>
                         </li>
-                        <li class="info-list__item">
-                            <h2 class="label">票價資訊：</h2>
-                            <span class="info-list__item__content">{{detailInfo.ticketInfo}}</span>
+                        <li class="mb-2 lg:mb-3 flex  items-center">
+                            <h2 class="text-lg lg:text-xl text-black-700 font-bold flex-[0_0_100px]">票價資訊：</h2>
+                            <span
+                                class="text-base lg:text-lg text-black-700 font-normal">{{detailInfo.ticketInfo}}</span>
                         </li>
-                        <li class="info-list__item">
-                            <h2 class="label">注意事項：</h2>
-                            <span class="info-list__item__content">{{detailInfo.remarks}}</span>
+                        <li class="mb-2 lg:mb-3 flex  items-center">
+                            <h2 class="text-lg lg:text-xl text-black-700 font-bold flex-[0_0_100px]">注意事項：</h2>
+                            <span class="text-base lg:text-lg text-black-700 font-normal">{{detailInfo.remarks}}</span>
                         </li>
                     </ul>
                     <ul *ngSwitchCase="'Restaurant'" class="info-list">
-                        <li class="info-list__item">
-                            <h2 class="label">營業時間：</h2>
-                            <span class="info-list__item__content">{{detailInfo.openTime}}</span>
+                        <li class="mb-2 lg:mb-3 flex  items-center">
+                            <h2 class="text-lg lg:text-xl text-black-700 font-bold flex-[0_0_100px]">營業時間：</h2>
+                            <span class="text-base lg:text-lg text-black-700 font-normal">{{detailInfo.openTime}}</span>
                         </li>
-                        <li class="info-list__item">
-                            <h2 class="label">聯絡電話：</h2>
-                            <span class="info-list__item__content"><a
+                        <li class="mb-2 lg:mb-3 flex  items-center">
+                            <h2 class="text-lg lg:text-xl text-black-700 font-bold flex-[0_0_100px]">聯絡電話：</h2>
+                            <span class="text-base lg:text-lg text-black-700 font-normal"><a
                                     href="tel:{{detailInfo.phone}}">{{detailInfo.phone}}</a></span>
                         </li>
-                        <li class="info-list__item">
-                            <h2 class="label">餐廳地址：</h2>
-                            <span class="info-list__item__content"><a
+                        <li class="mb-2 lg:mb-3 flex  items-center">
+                            <h2 class="text-lg lg:text-xl text-black-700 font-bold flex-[0_0_100px]">餐廳地址：</h2>
+                            <span class="text-base lg:text-lg text-black-700 font-normal"><a
                                     href="https://www.google.com/maps/place/{{detailInfo.position.PositionLat}},{{detailInfo.position.PositionLon}}">{{detailInfo.address
                                     || detailInfo.name}}</a></span>
                         </li>
-                        <li class="info-list__item">
-                            <h2 class="label">官方網站：</h2>
-                            <span class="info-list__item__content"><a
+                        <li class="mb-2 lg:mb-3 flex  items-center">
+                            <h2 class="text-lg lg:text-xl text-black-700 font-bold flex-[0_0_100px]">官方網站：</h2>
+                            <span class="text-base lg:text-lg text-black-700 font-normal"><a
                                     href="{{detailInfo.websiteUrl}}">{{detailInfo.websiteUrl}}</a></span>
                         </li>
                     </ul>
                     <ul *ngSwitchCase="'Activity'" class="info-list">
-                        <li class="info-list__item">
-                            <h2 class="label">活動時間：</h2>
-                            <span class="info-list__item__content">{{commonCard.start}} ~ {{commonCard.end}}</span>
+                        <li class="mb-2 lg:mb-3 flex  items-center">
+                            <h2 class="text-lg lg:text-xl text-black-700 font-bold flex-[0_0_100px]">活動時間：</h2>
+                            <span class="text-base lg:text-lg text-black-700 font-normal">{{commonCard.start}} ~
+                                {{commonCard.end}}</span>
                         </li>
-                        <li class="info-list__item">
-                            <h2 class="label">聯絡電話：</h2>
-                            <span class="info-list__item__content"><a
+                        <li class="mb-2 lg:mb-3 flex  items-center">
+                            <h2 class="text-lg lg:text-xl text-black-700 font-bold flex-[0_0_100px]">聯絡電話：</h2>
+                            <span class="text-base lg:text-lg text-black-700 font-normal"><a
                                     href="tel:{{detailInfo.phone}}">{{detailInfo.phone}}</a></span>
                         </li>
-                        <li class="info-list__item">
-                            <h2 class="label">主辦單位：</h2>
-                            <span class="info-list__item__content">{{detailInfo.organizer}}</span>
+                        <li class="mb-2 lg:mb-3 flex  items-center">
+                            <h2 class="text-lg lg:text-xl text-black-700 font-bold flex-[0_0_100px]">主辦單位：</h2>
+                            <span
+                                class="text-base lg:text-lg text-black-700 font-normal">{{detailInfo.organizer}}</span>
                         </li>
-                        <li class="info-list__item">
-                            <h2 class="label">活動地點：</h2>
-                            <span class="info-list__item__content"><a
+                        <li class="mb-2 lg:mb-3 flex  items-center">
+                            <h2 class="text-lg lg:text-xl text-black-700 font-bold flex-[0_0_100px]">活動地點：</h2>
+                            <span class="text-base lg:text-lg text-black-700 font-normal"><a
                                     href="https://www.google.com/maps/place/{{detailInfo.position.PositionLat}},{{detailInfo.position.PositionLon}}">{{detailInfo.address
                                     || detailInfo.name}}</a></span>
                         </li>
-                        <li class="info-list__item">
-                            <h2 class="label">官方網站：</h2>
-                            <span class="info-list__item__content"><a
+                        <li class="mb-2 lg:mb-3 flex  items-center">
+                            <h2 class="text-lg lg:text-xl text-black-700 font-bold flex-[0_0_100px]">官方網站：</h2>
+                            <span class="text-base lg:text-lg text-black-700 font-normal"><a
                                     href="{{detailInfo.websiteUrl}}">{{detailInfo.websiteUrl}}</a></span>
                         </li>
-                        <li class="info-list__item">
-                            <h2 class="label">注意事項：</h2>
-                            <span class="info-list__item__content">{{detailInfo.remarks}}</span>
+                        <li class="mb-2 lg:mb-3 flex  items-center">
+                            <h2 class="text-lg lg:text-xl text-black-700 font-bold flex-[0_0_100px]">注意事項：</h2>
+                            <span class="text-base lg:text-lg text-black-700 font-normal">{{detailInfo.remarks}}</span>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="detail-cards--right">
-                <div class="detail-cards__map__container detail-cards__radius">
-                    <div class="detail-cards__map__content ">
-                        <div id="map" class="map detail-cards__radius"></div>
-                    </div>
+            <div class="w-full lg:flex lg:flex-col">
+                <div class="w-full lg:w-[540px] h-[185px] md:h-[250px] mb-[30px] lg:mb-8">
+                    <div id="map" class="w-full h-full rounded-xl"></div>
                 </div>
-                <div class="detail-cards__surround__container">
-                    <div class="surround__container">
-                        <div class="surround__heading">
-                            <h2 class="label">周邊資訊：</h2>
-                        </div>
-                        <div class="surround__content">
-                            <a class="surround__item" href="javascript:void(0);">
-                                <div class="surround__item__icon">
-                                    <p class="icon-btn--scene icon-btn" alt="附近景點 icon"></p>
-                                </div>
-                                <div class="surround__item__name">
-                                    <p class="surround__font">附近景點</p>
-                                </div>
-
-                            </a>
-                            <a class="surround__item" href="javascript:void(0);">
-                                <div class="surround__item__icon">
-                                    <p class="icon-btn--event icon-btn" alt="附近活動 icon"></p>
-                                </div>
-                                <div class="surround__item__name">
-                                    <p class="surround__font">附近活動</p>
-                                </div>
-                            </a>
-                            <a class="surround__item" href="javascript:void(0);">
-                                <div class="surround__item__icon">
-                                </div>
-                                <p class="icon-btn--food icon-btn" alt="附近美食 icon"></p>
-                                <div class="surround__item__name">
-                                    <p class="surround__font">附近美食</p>
-                                </div>
-                            </a>
-                        </div>
+                <div class="w-full">
+                    <div class="pb-5 lg:p-0 lg:mb-5">
+                        <h2 class="text-lg md:text-xl text-black-700 font-bold flex-[0_0_100px]">周邊資訊：</h2>
+                    </div>
+                    <div class="flex flex-col lg:flex-row space-y-[9px] lg:space-y-0 lg:space-x-[30px] text-green">
+                        <a class="w-full h-[76px] lg:h-[110px] flex flex-col items-center lg:justify-center bg-white rounded-lg border border-grey-light"
+                            href="javascript:void(0);">
+                            <div class="p-0 m-0">
+                                <p class="icon-btn--scene icon-btn" alt="附近景點 icon"></p>
+                            </div>
+                            <div>
+                                <p class="text-base font-bold">附 近 景 點</p>
+                            </div>
+                        </a>
+                        <a class="w-full h-[76px] lg:h-[110px] flex flex-col items-center lg:justify-center bg-white rounded-lg border border-grey-light"
+                            href="javascript:void(0);">
+                            <div class="p-0 m-0">
+                                <p class="icon-btn--event icon-btn" alt="附近活動 icon"></p>
+                            </div>
+                            <div>
+                                <p class="text-base font-bold">附 近 活 動</p>
+                            </div>
+                        </a>
+                        <a class="w-full h-[76px] lg:h-[110px] flex flex-col items-center lg:justify-center bg-white rounded-lg border border-grey-light"
+                            href="javascript:void(0);">
+                            <div class="p-0 m-0">
+                            </div>
+                            <p class="icon-btn--food icon-btn" alt="附近美食 icon"></p>
+                            <div>
+                                <p class="text-base font-bold">附 近 美 食</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="desktop-detail__common__more">
-        <div class="more-spot__container">
-            <div class="more-spot__content">
-                <div class="spot-card__content__heading" [ngSwitch]="getByValue(detailInfo.type)">
-                    <h1 *ngSwitchCase="'ScenicSpot'" class="heading">還有這些不能錯過的景點</h1>
-                    <h1 *ngSwitchCase="'Restaurant'" class="heading">還有這些不能錯過的美食</h1>
-                    <h1 *ngSwitchCase="'Activity'" class="heading">還有這些不能錯過的活動</h1>
-                </div>
-                <div class="spot-card__content__cards">
-                    <ng-container *ngFor="let info of surroundList">
-                        <a href="javascript:void(0);" [routerLink]="['/detail']" [queryParams]="{type:type, id:info.id
-                        }" (click)="refresh()">
-                            <app-spot-card [info]="info"></app-spot-card>
-                        </a>
-                    </ng-container>
-                </div>
+    <section class="w-full mb-[71px] md:mb-[120px] px-[15px] md:px-0">
+        <div class="mb-2 md:mb-3 flex  justify-between items-center">
+            <div class="hidden md:block px-[15px] mb-3" [ngSwitch]="getByValue(detailInfo.type)">
+                <h1 *ngSwitchCase="'ScenicSpot'" class="text-4xl text-black-700 font-light">還有這些不能錯過的景點</h1>
+                <h1 *ngSwitchCase="'Restaurant'" class="text-4xl text-black-700 font-light">還有這些不能錯過的美食</h1>
+                <h1 *ngSwitchCase="'Activity'" class="text-4xl text-black-700 font-light">還有這些不能錯過的活動</h1>
+            </div>
+            <div class="md:hidden">
+                <h1 class="text-2xl text-black-700 font-light">還有這些不能錯過</h1>
+            </div>
+            <div [ngSwitch]="getByValue(detailInfo.type)">
+                <a *ngSwitchCase="'ScenicSpot'" class="no-underline" href="javascript:void(0);">
+                    <div class="flex items-center text-orange">查看更多景點 <mat-icon>chevron_right</mat-icon>
+                    </div>
+                </a>
+                <a *ngSwitchCase="'Restaurant'" class="no-underline" href="javascript:void(0);">
+                    <div class="flex items-center text-orange">查看更多美食 <mat-icon>chevron_right</mat-icon>
+                    </div>
+                </a>
+                <a *ngSwitchCase="'Activity'" class="no-underline" href="javascript:void(0);">
+                    <div class="flex items-center text-orange">查看更多活動 <mat-icon>chevron_right</mat-icon>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="w-full overflow-scroll">
+            <div class="w-[928px] lg:w-[1110px] flex items-center">
+                <article class="w-[220px] md:w-[255px] mr-[15px] md:mr-[20px] last:mr-0" *ngFor="let info of surroundList">
+                    <app-spot-card (click)="refresh()" [datum]="info"></app-spot-card>
+                </article>
             </div>
         </div>
     </section>

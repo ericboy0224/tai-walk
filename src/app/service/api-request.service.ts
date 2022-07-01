@@ -8,20 +8,7 @@ import { Subject } from 'rxjs';
     providedIn: 'root'
 })
 export class ApiRequestService {
-    specialMunicipality: Map<string, string> = new Map([
-        ['Taipei', '台北'],
-        ['NewTaipei', '新北'],
-        ['Taoyuan', '桃園'],
-        ['Taichung', '台中'],
-        ['Tainan', '台南'],
-        ['Kaohsiung', '高雄']
-    ]);
-
-    detailTarget = new Subject<any>();
-
-    SceneSpotSubjects = ['自然風景類', '觀光工廠類', '遊憩類', '休閒農業類', '生態類', '溫泉類', '古蹟類'];
-    ActivitySubjects = ['節慶活動', '自行車活動', '遊憩活動', '產業文化活動', '年度活動', '四季活動'];
-    RestaurantSubjects = ['地方特產', '中式美食', '甜點冰品', '異國料理', '伴手禮', '素食'];
+    type = new Subject<'ScenicSpot' | 'Restaurant' | 'Activity'>();
 
     constructor(private http: HttpClient, private router: Router) { }
 
@@ -40,8 +27,6 @@ export class ApiRequestService {
         return this.GetMethod(`Activity?${data}`);
     }
 
-
-
     /*****************  RESTAURANT *****************/
     /**
      * getRestaurantListByCity
@@ -56,8 +41,6 @@ export class ApiRequestService {
     public getRestaurantList(data: any = '') {
         return this.GetMethod(`Restaurant?${data}`);
     }
-
-
 
     /*****************  SCENIC SPOT *****************/
     /**
@@ -77,7 +60,7 @@ export class ApiRequestService {
         return this.GetMethod(`ScenicSpot?${data}`);
     }
 
-    methodRouting(type: string, id:string) {
+    methodRouting(type: string, id: string) {
         const apiData = `$filter=${type}ID eq '${id}'`;
 
         if (type === 'ScenicSpot') {

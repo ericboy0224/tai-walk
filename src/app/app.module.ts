@@ -13,33 +13,31 @@ import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatCardModule} from '@angular/material/card';
-import { SearchButtonComponent } from './component/search-button/search-button.component';
-import { TextInputComponent } from './component/text-input/text-input.component';
-import { SelectFormComponent } from './component/select-form/select-form.component';
 import {LayoutModule} from '@angular/cdk/layout';
 import { HttpClientModule } from  '@angular/common/http';
 import { DetailComponent } from './page/desktop/detail/detail.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { SpotCardComponent } from './component/spot-card/spot-card.component';
 import {OverlayModule} from '@angular/cdk/overlay';
-import { DiscoverComponent } from './page/discover/discover.component';
 import { FormsModule } from '@angular/forms';
 import { CarouselComponent } from './component/carousel/carousel.component';
+import { SearchComponent } from './page/desktop/search/search.component';
+import { SearchGroupComponent } from './component/search-group/search-group.component';
+import { HotTopicComponent } from './page/desktop/search/hot-topic/hot-topic.component';
+import { SearchResultComponent } from './page/desktop/search/search-result/search-result.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         DesktopAppComponent,
         HomePageComponent,
-        SearchButtonComponent,
-        TextInputComponent,
-        SelectFormComponent,
         DetailComponent,
         SpotCardComponent,
-        DiscoverComponent,
-        CarouselComponent
-
-
+        CarouselComponent,
+        SearchComponent,
+        SearchGroupComponent,
+        HotTopicComponent,
+        SearchResultComponent
     ],
     imports: [
         BrowserModule,

@@ -1,13 +1,17 @@
-<div class="w-full h-full max-h-[400px] overflow-hidden rounded-3xl relative">
-    <div id="scroll" class="w-auto h-full max-h-[400px] flex flex-nowrap items-center ease-in-out duration-300">
-        <div *ngFor="let item of items" id="item-{{item.key}}" class="flex-[0_0_100%] relative">
-            <img class="h-full w-full" src="{{item.picture}}" alt="{{item.description}}">
-            <div *ngIf="option.nameVisible"
-                class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-center text-[28px] font-bold font-sans">
-                {{item.name}}</div>
+<div class="w-full h-[185px] tablet:h-[350px] laptop:h-[400px] overflow-hidden rounded-3xl relative">
+    <div id="scroll" class="w-auto h-full flex flex-nowrap items-center ease-in-out duration-300">
+        <div *ngFor="let item of getItems()" id="item-{{item.key}}" class="flex-[0_0_100%] relative">
+            <a [routerLink]="['/detail']" [queryParams]="{type:item.type, id:item.id}" >
+                <img class="h-full w-full" src="{{item.picture}}" alt="{{item.description}}"
+                    onerror="this.src ='../../../assets/error/NoImage-1100x400.png'">
+                <div *ngIf="option.nameVisible"
+                    class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-center text-base tablet:text-[28px] font-bold font-sans">
+                    {{item.name}}</div>
+            </a>
         </div>
     </div>
-    <div class="w-full absolute top-1/2 -translate-y-1/2 h-[100px] flex items-center justify-between px-[30px]">
+    <div
+        class="hidden w-full absolute top-1/2 -translate-y-1/2 h-[100px] tablet:flex items-center justify-between px-[30px]">
         <button (click)="scroll(getKey('prev'), true)"
             class="h-10 w-10 bg-carousel-btn border-2 rounded-full flex items-center justify-center hover:bg-carousel-btn-hover">
             <mat-icon class="text-white">
@@ -21,9 +25,9 @@
             </mat-icon>
         </button>
     </div>
-    <div class="absolute w-auto bottom-[27px] right-[42px] bg-transparent">
-        <button (click)="scroll(item.key,true)" *ngFor="let item of items"
-            class="w-4 h-4 bg-zinc-300 rounded-full border-none ml-[14px] first:m-0"
+    <div class="absolute w-auto bottom-[10px] right-[21px] tablet:bottom-[27px] tablet:right-[42px] bg-transparent">
+        <button (click)="scroll(item.key,true)" *ngFor="let item of getItems()"
+            class="w-2 h-2 tablet:w-4 tablet:h-4 bg-zinc-300 rounded-full border-none ml-[6.9px] tablet:ml-[14px] first:m-0"
             [class.indicator-focused]="item.indicatorFocused"></button>
     </div>
 </div>

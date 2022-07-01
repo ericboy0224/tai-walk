@@ -1,6 +1,13 @@
 module.exports = {
     content: ["./src/**/*.{html, ts}"],
     theme: {
+        screens: {
+            'large-mobile': '480px',
+
+            'tablet': '704px',
+
+            'laptop': '1110px',
+        },
         extend: {
             colors: {
                 transparent: 'transparent',
@@ -9,6 +16,8 @@ module.exports = {
                     'dark': '#6E7D60',
                     'light': '#65895F',
                     'hover': 'rgba(127, 151, 123, 0.2)',
+                    'decoration': '#E0DA48',
+                    'menu': '#A8B8A5',
                     DEFAULT: '#7F977B'
                 },
                 'black': {
@@ -28,6 +37,9 @@ module.exports = {
                 },
                 'orange': {
                     DEFAULT: '#FF725E'
+                },
+                'gold': {
+                    DEFAULT: '#BEA363'
                 }
             },
             fontFamily: {

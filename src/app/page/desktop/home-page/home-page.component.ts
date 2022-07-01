@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { forkJoin, from } from 'rxjs';
 import { CommonCard } from 'src/app/model/common-card.model';
 import { Router } from '@angular/router';
+import { AllGroupsService } from 'src/app/service/all-groups.service';
 
 
 @Component({
@@ -32,10 +33,9 @@ export class HomePageComponent implements OnInit {
     } = {
             type: 'ScenicSpot',
             keyword: ''
-        };
+        }
 
-
-    constructor(private api: ApiRequestService, private router: Router) { }
+    constructor(private api: ApiRequestService, private router: Router, private groups:AllGroupsService) { }
 
     ngOnInit(): void {
         this.getCarouselSpotList();
@@ -44,15 +44,7 @@ export class HomePageComponent implements OnInit {
         this.getCardSpotList('getRestaurantList', this.hotRestaurantInfos);
     }
 
-    search(){
-        console.log(this.searchOptions);
-    }
-
-
-    changeSearchType(typeInEng: 'ScenicSpot' | 'Restaurant' | 'Activity') {
-        this.searchOptions.type = typeInEng;
-        this.searchDropdown = false;
-    }
+    search() {}
 
     /***********  ACTIVITY  *****************/
     getActivitySpotList() {
@@ -97,14 +89,11 @@ export class HomePageComponent implements OnInit {
     /************  CAROUSEL ****************/
     getCarouselSpotList() {
         const apiData = '$filter=Picture/PictureUrl1 ne null&$top=1&$format=JSON';
-        const specials = [];
+        const specials: any[] = [];
+        const cities = this.groups.getSpecialMunicipality();
 
-        for (const [city] of this.api.specialMunicipality) {
-            specials.push(this.api.getScenicSpotByCity(city, apiData));
-        }
-
+        cities.forEach((c) => specials.push(this.api.getScenicSpotByCity(c, apiData)));
         this.scenicBased(specials, this.carouselInfos);
-
     }
 
     /************  SCENIC ****************/

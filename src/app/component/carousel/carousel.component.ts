@@ -2,7 +2,9 @@ import { Component, OnInit, Input, AfterViewInit, OnDestroy } from '@angular/cor
 import * as _ from 'lodash';
 
 interface Item {
-    name?: string;
+    type:string
+    id: string;
+    name: string;
     key: number;
     picture: string;
     description: string;
@@ -26,10 +28,10 @@ export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() option: Option = {
         nameVisible: true,
         autoPlay: true,
-        interval: 3000
+        interval: 3000,
     }
 
-    items: Item[] = [];
+    private items: Item[] = [];
 
     private _activeKey!: number;
     private _prevKey!: number;
@@ -45,6 +47,8 @@ export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
     ngAfterViewInit(): void {
         setTimeout(() => {
             this.items = _.map(this.carouselInfos, (value: any, key: number): Item => ({
+                type:value.type,
+                id: value.id,
                 name: value.city + ' | ' + _.split(value._name, '_', 1)[0],
                 key: key,
                 picture: value.picture.PictureUrl1,
@@ -59,6 +63,7 @@ export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
                     this.scroll(this.getKey('next'));
                 }, this.option.interval)
             }
+
         }, 300);
     }
 
@@ -90,12 +95,16 @@ export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
         return key === 'active' ? this._activeKey : key === 'next' ? this._nextKey : this._prevKey;
     }
 
+    getItems(){
+        return this.items;
+    }
+
     scroll(key: number, stopInterval: boolean = false) {
         const scroll: any = document.getElementById('scroll');
         scroll.style['transform'] = `translateX(-${key * 100}%)`;
         this._setActive(key);
 
-        if(stopInterval) clearInterval(this._interval);
+        if (stopInterval) clearInterval(this._interval);
     }
 
 }

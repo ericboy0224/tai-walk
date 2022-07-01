@@ -1,45 +1,72 @@
-<div class="overlay" *ngIf="isOpen" (click)="isOpen = false"></div>
-<div class="h-full relative top-0 left-0 font-tc">
-    <header class="fixed top-0 left-0 w-full h-20 z-50 border-b border-grey-light bg-white">
+<div class="z-[2000] backdrop-blur-sm bg-black-700 bg-opacity-10 fixed top-0 left-0 w-full h-full " *ngIf="isOpen"
+    (click)="isOpen = false">
+</div>
+<nav class="z-[3000] w-[276px] h-[330px] pt-[17px] px-1 fixed top-0 right-0 bg-white border border-grey-light rounded-bl-[30px]"
+    *ngIf="isOpen">
+    <div class="flex pl-[26px] mb-[9px]">
+        <img src="../../../assets/icons/logos/Logo-mobile.svg" alt="台灣走走的手機 logo" class="h-[30px]">
+        <a href="javascript:void(0);"
+            class="w-[50px] h-[50px] m-2 px-[10px] py-[15px] flex flex-col justify-center items-center tablet:hidden absolute top-0 right-0 bg-green-menu rounded-xl"
+            (click)="isOpen = false" type="button">
+            <span class="w-2/3 h-1/6 bg-white rounded-[1px] rotate-45 translate-y-1/2"></span>
+            <span class="w-2/3 h-1/6 bg-white rounded-[1px] -rotate-45 -translate-y-1/2"></span>
+        </a>
+    </div>
+    <ul (click)="search($event)" class="text-grey text-xl list-none">
+        <li class="py-6 px-[89px] border-b border-grey-light">
+            <a href="javascript:void(0);" data-search="ScenicSpot">
+                探索景點
+            </a>
+        </li>
+        <li class="py-6 px-[89px] border-b border-grey-light">
+            <a href="javascript:void(0);" data-search="Activity">
+                節慶活動
+            </a>
+        </li>
+        <li class="py-6 px-[89px]">
+            <a href="javascript:void(0);" data-search="Restaurant">
+                品嚐美食
+            </a>
+        </li>
+    </ul>
+</nav>
+<div class="h-full min-h-[100vh] relative top-0 left-0 font-tc">
+    <header class="z-[2000] fixed top-0 left-0 w-full h-16 tablet:h-20 tablet:border-b border-grey-light bg-white">
         <nav class="w-full h-full flex content-center justify-between px-11">
-            <div class="flex content-center justify-center">
+            <div class="hidden tablet:flex content-center justify-center">
                 <a class="max-h-8 m-auto" routerLink="/home"><img src="../../../../assets/icons/logos/Logo-desktop.svg"
                         alt="台灣走走的電腦 logo"></a>
             </div>
-            <div class="hidden">
+            <div class="block tablet:hidden m-auto">
                 <a routerLink="/home"><img src="../../../../assets/icons/logos/Logo-mobile.svg" alt="台灣走走的手機 logo"></a>
             </div>
-            <ul class="flex content-center">
-                <li class="m-auto text-lg font-400 text-grey mr-5 "><a href="#">探索景點</a></li>
-                <li class="m-auto text-lg font-400 text-grey mr-5 "><a href="#">節慶活動</a></li>
-                <li class="m-auto text-lg font-400 text-grey  "><a href="#">品嚐美食</a></li>
+            <ul (click)="search($event)" class="hidden tablet:flex tablet:items-center">
+                <li class="m-auto text-lg font-400 text-grey mr-5 ">
+                    <a href="javascript:void(0);" data-search="ScenicSpot">
+                        探索景點
+                    </a>
+                </li>
+                <li class="m-auto text-lg font-400 text-grey mr-5 ">
+                    <a href="javascript:void(0);" data-search="Activity">
+                        節慶活動
+                    </a>
+                </li>
+                <li class="m-auto text-lg font-400 text-grey">
+                    <a href="javascript:void(0);" data-search="Restaurant">
+                        品嚐美食
+                    </a>
+                </li>
             </ul>
         </nav>
-        <a href="javascript:void(0);" class="hidden" (click)="isOpen = !isOpen"
-            type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
-            <span class="line line--half"></span>
-            <span class="line line--full"></span>
-            <span class="line line--half"></span>
+        <a href="javascript:void(0);"
+            class="w-[50px] h-[50px] m-2 px-[10px] py-[15px] flex flex-col justify-between items-end tablet:hidden absolute top-0 right-0 bg-green-menu rounded-xl"
+            (click)="isOpen = true" type="button">
+            <span class="w-2/3 h-1/6 bg-white rounded-[1px]"></span>
+            <span class="w-full h-1/6 bg-white rounded-[1px]"></span>
+            <span class="w-2/3 h-1/6 bg-white rounded-[1px]"></span>
         </a>
-        <ng-template (blur)="isOpen = false" cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger"
-            [cdkConnectedOverlayOpen]="isOpen">
-            <div class="mobile-menu">
-                <div class="mobile-menu__header">
-                    <img class="mobile-menu__logo" src="../../../../assets/icons/logos/Logo-mobile.svg"
-                        alt="台灣走走的手機 logo">
-                </div>
-                <div class="mobile-menu__content">
-                    <ul class="mobile-menu__list">
-                        <li><a class="mobile-menu__btn" href="javascript:void(0);">探索景點</a></li>
-                        <li><a class="mobile-menu__btn" href="javascript:void(0);">節慶活動</a></li>
-                        <li><a class="mobile-menu__btn" href="javascript:void(0);">品嚐美食</a></li>
-                    </ul>
-                </div>
-            </div>
-        </ng-template>
-
     </header>
-    <main class="max-w-[1200px] m-auto px-11 mt-[162.5px]">
+    <main class="max-w-[1200px] m-auto px-0 tablet:px-11 mt-[70px] tablet:mt-[162.5px] pb-[120px]">
         <router-outlet></router-outlet>
     </main>
     <footer class="absolute bottom-0 w-full py-5 text-sm text-center text-white bg-green-light">
