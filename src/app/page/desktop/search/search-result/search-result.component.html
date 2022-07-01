@@ -3,7 +3,8 @@
         <h2 class="inline-block text-black-700 text-2xl font-light mr-[7px]">搜尋結果 </h2>
         <span class="text-grey text-sm font-normal">共有 <span class="text-gold">{{totalLength}}</span> 筆</span>
     </div>
-    <ng-container *ngFor="let spot of chunked">
+    <ng-container *ngFor="let spots of chunked">
+        <app-spot-card *ngFor="let spot of spots" [datum]="spot"></app-spot-card>
     </ng-container>
 
 </section>

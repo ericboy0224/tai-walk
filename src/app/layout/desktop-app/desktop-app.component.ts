@@ -1,5 +1,6 @@
+import { CommonUtilitiesService } from 'src/app/service/common-utilities.service';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 
 @Component({
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './desktop-app.component.html',
     styleUrls: ['./desktop-app.component.scss']
 })
+
+
 export class DesktopAppComponent implements OnInit {
     isOpen: boolean = false;
-    constructor(private router: Router) { }
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event: any) {
+        this.common.isTablet.next(event.target.innerWidth >= 704)
+    }
+
+    constructor(private router: Router, private common: CommonUtilitiesService) { }
 
     ngOnInit(): void {
     }

@@ -30,12 +30,6 @@ export class SearchComponent implements OnInit {
     cities: any;
     chineseCityName: string[] = [];
 
-    @HostListener('window:resize', ['$event'])
-    onResize(event: any) {
-        this.isTablet = event.target.innerWidth >= 704
-        console.log(this.isTablet);
-    }
-
     constructor(private allGroups: AllGroupsService, private route: ActivatedRoute, private router: Router) {
         this.init();
 

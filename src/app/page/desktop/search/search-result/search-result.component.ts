@@ -1,5 +1,4 @@
-import { SpotCard } from './../../../../model/spot-card';
-import { forkJoin, map } from 'rxjs';
+import { map } from 'rxjs';
 import { ApiRequestService } from './../../../../service/api-request.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -16,8 +15,10 @@ export class SearchResultComponent implements OnInit {
     class!: string;
     totalLength!: number;
     chunked: any[] = [];
+    source: any;
+    currentPage = 0;
 
-    constructor(private route: ActivatedRoute, private api: ApiRequestService) {
+    constructor(private route: ActivatedRoute, private api: ApiRequestService, private common: CommonUtilitiesService) {
 
         this.route.queryParams.subscribe(param => {
             if (!param['type'] || !param['class']) return;
@@ -48,12 +49,22 @@ export class SearchResultComponent implements OnInit {
         const data = `$filter=(contains(Class1,'${this.class}') or contains(Class2,'${this.class}') or contains(Class3,'${this.class}'))`;
         this.api[fn](data)
             .pipe(
+                map((spots: any) => {
+                    return spots.filter((value: any) => !!value['Picture']['PictureUrl1'])
+                }),
                 map((spots: any) =>
-                    spots.map((spot: any) => CommonUtilitiesService.SetCommonCard(spot)))
+                    spots.map((spot: any) => CommonUtilitiesService.SetCommonCard(spot))),
+
             )
             .subscribe(v => {
+                this.source = v;
                 this.totalLength = v.length
-                this.chunked = _.chunk(v, 20);
+
+                this.common.isTablet.subscribe(condition => {
+                    this.chunked = condition ? _.chunk(v, 20) : _.chunk(v, 8);
+                    console.log(this.chunked);
+                })
+
             });
 
     }

@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { CommonCard } from '../model/common-card.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CommonUtilitiesService {
+
+    isTablet = new Subject<boolean>();
 
     constructor() { }
 
