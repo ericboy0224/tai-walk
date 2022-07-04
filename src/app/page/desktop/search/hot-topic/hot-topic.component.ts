@@ -16,6 +16,12 @@ export class HotTopicComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.queryParams.subscribe((param: any) => {
+
+            // initial value of query params
+            if(!param['type']){
+                this.router.navigate([], { queryParams: { type: 'ScenicSpot' }, relativeTo: this.route });
+            }
+
             this.type = param['type'];
 
             const group = this.allGroup.getSubjects(this.type);
