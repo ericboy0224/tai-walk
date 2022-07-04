@@ -1,10 +1,32 @@
 <section class="w-full">
     <div>
-        <h2 class="inline-block text-black-700 text-2xl font-light mr-[7px]">搜尋結果 </h2>
+        <h2 class="inline-block text-black-700 text-2xl font-light mr-[7px] mb-2">搜尋結果 </h2>
         <span class="text-grey text-sm font-normal">共有 <span class="text-gold">{{totalLength}}</span> 筆</span>
     </div>
-    <ng-container *ngFor="let spots of chunked">
-        <app-spot-card *ngFor="let spot of spots" [datum]="spot"></app-spot-card>
-    </ng-container>
-
+    <div class="mb-[90px]">
+        <div class="mb-[21px]" *ngFor="let spot of displayData">
+            <app-spot-card [datum]="spot"></app-spot-card>
+        </div>
+    </div>
+    <div class="px-[51px] flex items-center justify-center space-x-2">
+        <button (click)="previous()" class="w-8 h-8 bg-green border-0 rounded-[4px] flex items-center justify-center"
+            [class.disabled]="!paginationControl.left">
+            <img *ngIf="paginationControl.left" src="../../../../../assets/icons/arrows/arrow-left24_W.svg"
+                alt="上一步 選項">
+            <img *ngIf="!paginationControl.left" src="../../../../../assets/icons/arrows/arrow-left24_G.svg"
+                alt="上一步 選項">
+        </button>
+        <button
+            class="w-8 h-8 text-sm text-grey border border-grey-light rounded-[4px] flex items-center justify-center"
+            *ngFor="let page of getPages()" (click)="changePage(page.index)" [class.selected]='page.selected'>
+            {{page.display}}
+        </button>
+        <button (click)="next()" class="w-8 h-8 bg-green border-0 rounded-[4px] flex items-center justify-center"
+            [class.disabled]="!paginationControl.right">
+            <img *ngIf="paginationControl.right" src="../../../../../assets/icons/arrows/arrow-right24_W.svg"
+                alt="上一步 選項">
+            <img *ngIf="!paginationControl.right" src="../../../../../assets/icons/arrows/arrow-right24_G.svg"
+                alt="上一步 選項">
+        </button>
+    </div>
 </section>
