@@ -26,6 +26,7 @@ export class DesktopAppComponent implements OnInit {
     search(e: any) {
         if (e.target.tagName !== 'A') return;
         this.router.navigate(['/search'], { queryParams: { type: e.target.dataset.search } });
+        this.isOpen = false;
     }
 
 }
