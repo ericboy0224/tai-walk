@@ -3,7 +3,7 @@
         <h2 class="inline-block text-black-700 text-2xl font-light mr-[7px] mb-2">搜尋結果 </h2>
         <span class="text-grey text-sm font-normal">共有 <span class="text-gold">{{totalLength}}</span> 筆</span>
     </div>
-    <div class="mb-[90px]">
+    <div class="mb-[90px] large-mobile:grid large-mobile:grid-cols-2 tablet:grid-cols-4 large-mobile:gap-x-3 tablet:gap-x-[30px]">
         <div class="mb-[21px]" *ngFor="let spot of displayData">
             <app-spot-card [datum]="spot"></app-spot-card>
         </div>
