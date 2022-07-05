@@ -26,48 +26,42 @@ export class SearchResultComponent implements OnInit {
         left: true,
         right: true
     }
+    previousCondition!: boolean;
 
     constructor(private route: ActivatedRoute, private api: ApiRequestService, private common: CommonUtilitiesService) {
 
         this.route.queryParams.subscribe(param => {
-            if (!param['type'] || !param['class']) return;
-            this.type = param['type'];
-            this.class = param['class'];
-
-            this.getDataByClass();
+            if (param['type'] && param['class']) {
+                this.type = param['type'];
+                this.class = param['class'];
+                this.getDataByClass();
+            }
         })
     }
 
     ngOnInit(): void {
     }
 
-    previous(){
-        if(this.paginationControl.left){
+    previous() {
+        if (this.paginationControl.left) {
             this.changePage(this.pageIndex - 1)
         }
     }
 
-    next(){
-        if(this.paginationControl.right){
+    next() {
+        if (this.paginationControl.right) {
             this.changePage(this.pageIndex + 1)
         }
     }
 
     changePage(index: number | number[]) {
         if (Array.isArray(index)) return;
-        this.paginationControl.right = index === this.pages.length - 1 ? false : true;
-        this.paginationControl.left = index === 0 ? false : true;
-        this.pageIndex = index;
-
-        _.forEach(this.pages, (v, i) => {
-            v.selected = false;
-        })
-        this.pages[index].selected = true;
         this.currentPage.next(index);
     }
 
     getPages() {
         const length = this.pages.length;
+
         const middle: Page = {
             index: [],
             display: '...',
@@ -75,20 +69,25 @@ export class SearchResultComponent implements OnInit {
         }
 
         if (length > 5) {
-            if (this.pageIndex >= Math.floor(length * 0.5)) {
-                return [this.pages[0], middle, this.pages[this.pageIndex - 2], this.pages[this.pageIndex - 1], this.pages[this.pageIndex]];
+            // return this.pageIndex === 0
+            //     ? [this.pages[this.pageIndex], this.pages[this.pageIndex + 1], middle, this.pages[length - 2], this.pages[length - 1]]
+            //     : [this.pages[this.pageIndex-1], this.pages[this.pageIndex], middle, this.pages[length - 2], this.pages[length - 1]];
+            if (this.pageIndex === 0 || this.pageIndex >= length - 2) {
+                return [this.pages[0], this.pages[1], middle, this.pages[length - 2], this.pages[length - 1]]
             }
+
             else {
-                return [this.pages[this.pageIndex], this.pages[this.pageIndex + 1], middle, this.pages[length - 2], this.pages[length - 1]];
+                return [this.pages[this.pageIndex - 1], this.pages[this.pageIndex], middle, this.pages[length - 2], this.pages[length - 1]]
             }
+
         } else {
             return this.pages
         }
 
     }
 
-
     private paginationInit() {
+        this.pages = [];
         _.forEach(this.chunked, (value: any, index: number) => {
             this.pages.push({
                 index: index,
@@ -105,14 +104,30 @@ export class SearchResultComponent implements OnInit {
     private updateByScreenSize() {
         // Get the screen size stream.
         this.common.isTablet.subscribe(condition => {
-            this.chunked = condition ? _.chunk(this.source, 20) : _.chunk(this.source, 8);
-            this.updateCurrentPage();
-            this.paginationInit();
+
+            if (this.previousCondition !== condition) {
+                this.chunked = [];
+                this.chunked = condition ? _.chunk(this.source, 20) : _.chunk(this.source, 8);
+                this.paginationInit();
+                this.changePage(0);
+                this.previousCondition = condition;
+            }
+
+
         });
     }
 
     private updateByPageNumber() {
         this.currentPage.subscribe((pageNumber: number) => {
+            this.pageIndex = pageNumber;
+            this.paginationControl.right = pageNumber === this.pages.length - 1 ? false : true;
+            this.paginationControl.left = pageNumber === 0 ? false : true;
+
+            _.forEach(this.pages, (v, i) => {
+                v.selected = false;
+            })
+
+            this.pages[pageNumber].selected = true;
             this.updateCurrentPage();
         });
     }
@@ -137,12 +152,13 @@ export class SearchResultComponent implements OnInit {
                 this.source = v;
                 this.totalLength = v.length;
                 this.chunked = window.innerWidth >= 704 ? _.chunk(v, 20) : _.chunk(v, 8);
+                this.previousCondition = window.innerWidth >= 704;
                 this.updateByPageNumber();
                 this.updateByScreenSize();
             }, err => {
                 if (err.status === 400) {
                     const next = i + 1
-                    if (i > 3) return;
+                    if (next > 3) return;
                     this.fetchData(fn, next);
                 } else {
                     alert('請求失敗請洽管理員');
