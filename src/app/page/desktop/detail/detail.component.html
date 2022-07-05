@@ -1,6 +1,6 @@
 <article class="w-full h-full">
-    <section class="w-full pt-[24px] mb-4 md:mb-[30px] px-[15px] md:px-[45px]">
-        <nav class="w-full text-xs md:text-base">
+    <section class="w-full pt-[24px] mb-4 tablet:mb-[30px] px-[15px] tablet:px-[45px]">
+        <nav class="w-full text-xs tablet:text-base">
             <ol class="list-none flex">
                 <li><a routerLink="/home" class="text-green-dark">首頁</a></li>
                 <li><span class="text-grey mx-2">/</span></li>
@@ -12,27 +12,27 @@
             </ol>
         </nav>
     </section>
-    <section class="w-full mb-4 md:mb-[30px] px-[15px] md:px-[45px]">
+    <section class="w-full mb-4 tablet:mb-[30px] px-[15px] tablet:px-[45px]">
         <div class="w-full">
             <app-carousel [carouselInfos]="carouselInfos" [option]="carouselOption"></app-carousel>
         </div>
     </section>
-    <section class="w-full mb-[30px] md:mb-[60px] px-[19px] md:px-[60px]">
+    <section class="w-full mb-[30px] tablet:mb-[60px] px-[19px] tablet:px-[60px]">
         <div class="flex flex-col">
-            <div class="mb-[10px] md:mb-[15.5px]">
-                <h1 class="text-2xl md:text-4xl text-black-700 font-light">{{detailInfo.name}}</h1>
+            <div class="mb-[10px] tablet:mb-[15.5px]">
+                <h1 class="text-2xl tablet:text-4xl text-black-700 font-light">{{detailInfo.name}}</h1>
             </div>
-            <div class="flex flex-wrap items-center space-x-2 mb-[18px] md:mb-[33.5px]">
+            <div class="flex flex-wrap items-center space-x-2 mb-[18px] tablet:mb-[33.5px]">
                 <div *ngFor="let class of detailInfo.classes"
-                    class="px-2 py-1 md:px-3 flex items-center justify-center text-sm md:text-xl text-gold rounded-full border border-gold">
+                    class="px-2 py-1 tablet:px-3 flex items-center justify-center text-sm tablet:text-xl text-gold rounded-full border border-gold">
                     <span>#</span>
                     <span>{{class}}</span>
                 </div>
             </div>
-            <div class="mb-2 md:mb-[10px]">
-                <h3 class="text-lg md:text-xl text-black-300 font-medium md:font-bold">景點介紹：</h3>
+            <div class="mb-2 tablet:mb-[10px]">
+                <h3 class="text-lg tablet:text-xl text-black-300 font-medium tablet:font-bold">景點介紹：</h3>
             </div>
-            <div class="text-base md:text-lg text-black-700 font-light text-justify">
+            <div class="text-base tablet:text-lg text-black-700 font-light text-justify">
                 {{detailInfo.description}}
             </div>
         </div>
@@ -130,12 +130,12 @@
                 </div>
             </div>
             <div class="w-full lg:flex lg:flex-col">
-                <div class="w-full lg:w-[540px] h-[185px] md:h-[250px] mb-[30px] lg:mb-8">
+                <div class="w-full lg:w-[540px] h-[185px] tablet:h-[250px] mb-[30px] lg:mb-8">
                     <div id="map" class="w-full h-full rounded-xl"></div>
                 </div>
                 <div class="w-full">
                     <div class="pb-5 lg:p-0 lg:mb-5">
-                        <h2 class="text-lg md:text-xl text-black-700 font-bold flex-[0_0_100px]">周邊資訊：</h2>
+                        <h2 class="text-lg tablet:text-xl text-black-700 font-bold flex-[0_0_100px]">周邊資訊：</h2>
                     </div>
                     <div class="flex flex-col lg:flex-row space-y-[9px] lg:space-y-0 lg:space-x-[30px] text-green">
                         <a class="w-full h-[76px] lg:h-[110px] flex flex-col items-center lg:justify-center bg-white rounded-lg border border-grey-light"
@@ -170,14 +170,14 @@
             </div>
         </div>
     </section>
-    <section class="w-full mb-[71px] md:mb-[120px] px-[15px] md:px-0">
-        <div class="mb-2 md:mb-3 flex  justify-between items-center">
-            <div class="hidden md:block px-[15px] mb-3" [ngSwitch]="getByValue(detailInfo.type)">
+    <section class="w-full mb-[71px] tablet:mb-[120px] px-[15px] tablet:px-0">
+        <div class="mb-2 tablet:mb-3 flex  justify-between items-center">
+            <div class="hidden tablet:block px-[15px] mb-3" [ngSwitch]="getByValue(detailInfo.type)">
                 <h1 *ngSwitchCase="'ScenicSpot'" class="text-4xl text-black-700 font-light">還有這些不能錯過的景點</h1>
                 <h1 *ngSwitchCase="'Restaurant'" class="text-4xl text-black-700 font-light">還有這些不能錯過的美食</h1>
                 <h1 *ngSwitchCase="'Activity'" class="text-4xl text-black-700 font-light">還有這些不能錯過的活動</h1>
             </div>
-            <div class="md:hidden">
+            <div class="tablet:hidden">
                 <h1 class="text-2xl text-black-700 font-light">還有這些不能錯過</h1>
             </div>
             <div [ngSwitch]="getByValue(detailInfo.type)">
@@ -197,7 +197,7 @@
         </div>
         <div class="w-full overflow-scroll">
             <div class="w-[928px] lg:w-[1110px] flex items-center">
-                <article class="w-[220px] md:w-[255px] mr-[15px] md:mr-[20px] last:mr-0" *ngFor="let info of surroundList">
+                <article class="w-[220px] tablet:w-[255px] mr-[15px] tablet:mr-[20px] last:mr-0" *ngFor="let info of surroundList">
                     <app-spot-card (click)="refresh()" [datum]="info"></app-spot-card>
                 </article>
             </div>
