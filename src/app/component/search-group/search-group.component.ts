@@ -36,7 +36,7 @@ export class SearchGroupComponent implements OnInit {
 
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void { }
 
     changeSearchType(typeInEng: 'ScenicSpot' | 'Restaurant' | 'Activity') {
         this.defaultOptions.type = typeInEng;
@@ -45,6 +45,7 @@ export class SearchGroupComponent implements OnInit {
 
 
     search() {
-            this.router.navigateByUrl('/search/result');
+        if(!this.defaultOptions.keyword) return;
+        this.router.navigate(['/search/result'], { queryParams: { type: this.defaultOptions.type, keyword: this.defaultOptions.keyword } });
     }
 }
