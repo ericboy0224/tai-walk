@@ -9,31 +9,32 @@
     transition: all .2s ease-in-out;
 
     &--food {
-        background-image: url('assets/icons/nearby/nearby-food30.svg');
+        background-image: url('../../../../assets/icons/nearby/nearby-food30.svg');
 
         &:hover {
-            background-image: url('assets/icons/nearby/nearby-food30_hover.svg');
+            background-image: url('../../../../assets/icons/nearby/nearby-food30_hover.svg');
         }
     }
 
     &--event {
-        background-image: url('assets/icons/nearby/nearby-event30.svg');
+        background-image: url('../../../../assets/icons/nearby/nearby-event30.svg');
 
         &:hover {
-            background-image: url('assets/icons/nearby/nearby-event30_hover.svg');
+            background-image: url('../../../../assets/icons/nearby/nearby-event30_hover.svg');
         }
     }
 
     &--scene {
-        background-image: url('assets/icons/nearby/nearby-scene30.svg');
+        background-image: url('../../../../assets/icons/nearby/nearby-scene30.svg');
 
         &:hover {
-            background-image: url('assets/icons/nearby/nearby-scene30_hover.svg');
+            background-image: url('../../../../assets/icons/nearby/nearby-scene30_hover.svg');
         }
     }
 }
 
 
-.leaflet-bottom .leaflet-right {
+.leaflet-bottom .leaflet-right{
     display: none !important;
 }
+
