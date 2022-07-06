@@ -28,7 +28,7 @@ export class HotTopicComponent implements OnInit {
 
             this.cards = group.map((name, i) => ({
                 name: name,
-                img: `../../../../../assets/theme/${this.type}/Theme-bg-${i + 1}.png`
+                img: `assets/theme/${this.type}/Theme-bg-${i + 1}.png`
             }));
         })
 
