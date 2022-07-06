@@ -1,5 +1,22 @@
 # TaiwanTravel
 
+## Description
+
+The purpose of this project is to do a summary of what I have learned, 
+and learn things that I've looked for it for a long time but still got no chances to use on my job.
+
+- FRAMEWORK: Angular
+- CSS FRAMEWORK: TailwindCss
+- LANGUAGE: TypeScript
+- TOOLS:
+    1. Rxjs
+    2. Lodash
+    3. Leaflet
+    
+ And I also learned how to use notion to manage a project this time.
+ 
+ ---
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.4.
 
 ## Development server
