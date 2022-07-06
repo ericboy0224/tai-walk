@@ -146,6 +146,9 @@ export class SearchResultComponent implements OnInit {
                 this.previousCondition = window.innerWidth >= 704;
                 this.updateByPageNumber();
                 this.updateByScreenSize();
+                this.paginationInit();
+                this.changePage(0);
+                this.failedMode = this.totalLength === 0 ? true : false;
             }, err => {
                 if (err.status === 400) {
                     const next = i + 1
@@ -158,10 +161,6 @@ export class SearchResultComponent implements OnInit {
                     this.failedMode = true;
                     alert('請求失敗請洽管理員');
                 }
-            }, () => {
-                this.paginationInit();
-                this.changePage(0);
-                this.failedMode = false;
             });
     }
 
