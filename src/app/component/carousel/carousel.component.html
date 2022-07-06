@@ -3,7 +3,7 @@
         <div *ngFor="let item of getItems()" id="item-{{item.key}}" class="flex-[0_0_100%] relative">
             <a [routerLink]="['/detail']" [queryParams]="{type:item.type, id:item.id}" >
                 <img class="h-full w-full" src="{{item.picture}}" alt="{{item.description}}"
-                    onerror="this.src ='../../../assets/error/NoImage-1100x400.png'">
+                    onerror="this.src ='assets/error/NoImage-1100x400.png'">
                 <div *ngIf="option.nameVisible"
                     class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-center text-base tablet:text-[28px] font-bold font-sans">
                     {{item.name}}</div>

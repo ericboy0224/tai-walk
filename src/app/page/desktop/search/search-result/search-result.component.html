@@ -12,9 +12,9 @@
         <div class="px-[51px] flex items-center justify-center space-x-2">
             <button (click)="previous()" class="w-8 h-8 bg-green border-0 rounded-[4px] flex items-center justify-center"
                 [class.disabled]="!paginationControl.left">
-                <img *ngIf="paginationControl.left" src="../../../../../assets/icons/arrows/arrow-left24_W.svg"
+                <img *ngIf="paginationControl.left" src="assets/icons/arrows/arrow-left24_W.svg"
                     alt="上一步 選項">
-                <img *ngIf="!paginationControl.left" src="../../../../../assets/icons/arrows/arrow-left24_G.svg"
+                <img *ngIf="!paginationControl.left" src="assets/icons/arrows/arrow-left24_G.svg"
                     alt="上一步 選項">
             </button>
             <button
@@ -24,9 +24,9 @@
             </button>
             <button (click)="next()" class="w-8 h-8 bg-green border-0 rounded-[4px] flex items-center justify-center"
                 [class.disabled]="!paginationControl.right">
-                <img *ngIf="paginationControl.right" src="../../../../../assets/icons/arrows/arrow-right24_W.svg"
+                <img *ngIf="paginationControl.right" src="assets/icons/arrows/arrow-right24_W.svg"
                     alt="上一步 選項">
-                <img *ngIf="!paginationControl.right" src="../../../../../assets/icons/arrows/arrow-right24_G.svg"
+                <img *ngIf="!paginationControl.right" src="assets/icons/arrows/arrow-right24_G.svg"
                     alt="上一步 選項">
             </button>
         </div>
@@ -34,7 +34,7 @@
 
     <div *ngIf="failedMode" class="w-full h-[400px] flex justify-center items-center">
         <div class="flex flex-col items-center">
-            <img class="mb-[15.8px]" src="../../../../../assets/icons/misc/nofound80.svg" alt="搜尋失敗">
+            <img class="mb-[15.8px]" src="assets/icons/misc/nofound80.svg" alt="搜尋失敗">
             <p class="leading-9 text-green text-xl font-bold text-center">目前查無資料 <br> 請重新搜尋</p>
         </div>
     </div>

@@ -3,12 +3,12 @@
         [queryParams]="{type:datum.type, id:datum.id}">
         <div class="w-full h-[160px] md:h-[200px] mb-[6px] md:mb-[10px] rounded-[20px] overflow-hidden">
             <img class="h-full w-full hover:scale-[1.25] transition-all" src="{{datum.picture.PictureUrl1}}"
-                onerror="this.src='../../../../assets/error/NoImage-255x200.png'"
+                onerror="this.src='assets/error/NoImage-255x200.png'"
                 alt="{{datum.picture.PictureDescription1}}">
         </div>
         <div class="mb-1 md:mb-[6px] text-lg lg:text-[22px] font-bold">{{name}}</div>
         <div class="flex items-center text-grey">
-            <img src="../../../../assets/icons/spots/spot16.svg" alt="景點圖示" class="mr-1">
+            <img src="assets/icons/spots/spot16.svg" alt="景點圖示" class="mr-1">
             <p class="text-base">{{datum.city}}</p>
         </div>
     </a>
