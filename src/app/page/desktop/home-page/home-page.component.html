@@ -39,7 +39,7 @@
     <section class="w-full mb-9 flex flex-col">
         <div class="pl-1 tablet:pl-[15px] mb-3 flex items-center">
             <h2 class="text-2xl tablet:text-4xl text-black-700 font-light mr-auto">近期活動</h2>
-            <a class="no-underline" href="javascript:void(0);">
+            <a class="no-underline" [routerLink]="['/search']" [queryParams]="{type: 'Activity'}">
                 <div class="flex items-center text-orange">查看更多活動 <mat-icon>chevron_right</mat-icon>
                 </div>
             </a>
@@ -81,14 +81,14 @@
     <section class="w-full mb-9 overflow-hidden max-w-[1110px]">
         <div class="pl-1 tablet:pl-[15px] mb-3 flex items-center">
             <h2 class="text-2xl tablet:text-4xl text-black-700 font-light mr-auto">熱門打卡景點</h2>
-            <a class="no-underline" href="javascript:void(0);">
+            <a class="no-underline" [routerLink]="['/search']" [queryParams]="{type: 'ScenicSpot'}">
                 <div class="flex items-center text-orange">查看更多景點 <mat-icon>chevron_right</mat-icon>
                 </div>
             </a>
         </div>
-        <div class="w-full overflow-x-scroll">
-            <div class="w-[928px] laptop:w-[1110px] flex items-center space-x-[30px] laptop:space-x-0 laptop:justify-between">
-                <section class="w-[220px] tablet:w-[255px]" *ngFor="let spot of hotSpotInfos">
+        <div class="w-full overflow-x-scroll laptop:overflow-x-hidden">
+            <div class="w-[928px] laptop:w-full flex items-center laptop:justify-between">
+                <section class="w-[220px] tablet:w-[255px] mr-[30px] laptop:mr-0 last:mr-0" *ngFor="let spot of hotSpotInfos">
                     <app-spot-card [datum]="spot"></app-spot-card>
                 </section>
             </div>
@@ -97,14 +97,14 @@
     <section class="w-full overflow-hidden">
         <div class="pl-1 tablet:pl-[15px] mb-3 flex items-center">
             <h2 class="text-2xl tablet:text-4xl text-black-700 font-light mr-auto">一再回訪美食</h2>
-            <a class="no-underline" href="javascript:void(0);">
+            <a class="no-underline" [routerLink]="['/search']" [queryParams]="{type: 'Restaurant'}">
                 <div class="flex items-center text-orange">查看更多美食<mat-icon>chevron_right</mat-icon>
                 </div>
             </a>
         </div>
-        <div class="w-full overflow-x-scroll">
-            <div class="w-[928px] laptop:w-[1110px] flex items-center space-x-[30px]">
-                <section class="w-[220px] tablet:w-[255px]" *ngFor="let spot of hotRestaurantInfos">
+        <div class="w-full overflow-x-scroll laptop:overflow-x-hidden">
+            <div class="w-[928px] laptop:w-full flex items-center laptop:justify-between">
+                <section class="w-[220px] tablet:w-[255px] mr-[30px] laptop:mr-0 last:mr-0" *ngFor="let spot of hotRestaurantInfos">
                     <app-spot-card [datum]="spot"></app-spot-card>
                 </section>
             </div>

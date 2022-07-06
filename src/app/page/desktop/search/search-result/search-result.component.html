@@ -1,32 +1,43 @@
-<section class="w-full">
+<section class="w-full h-full">
     <div>
         <h2 class="inline-block text-black-700 text-2xl font-light mr-[7px] mb-2">搜尋結果 </h2>
         <span class="text-grey text-sm font-normal">共有 <span class="text-gold">{{totalLength}}</span> 筆</span>
     </div>
-    <div class="mb-[90px] large-mobile:grid large-mobile:grid-cols-2 tablet:grid-cols-4 large-mobile:gap-x-3 tablet:gap-x-[30px]">
-        <div class="mb-[21px]" *ngFor="let spot of displayData">
-            <app-spot-card [datum]="spot"></app-spot-card>
+    <div *ngIf="!failedMode">
+        <div class="mb-[90px] large-mobile:grid large-mobile:grid-cols-2 tablet:grid-cols-4 large-mobile:gap-x-3 tablet:gap-x-[30px]">
+            <div class="mb-[21px]" *ngFor="let spot of displayData">
+                <app-spot-card [datum]="spot"></app-spot-card>
+            </div>
+        </div>
+        <div class="px-[51px] flex items-center justify-center space-x-2">
+            <button (click)="previous()" class="w-8 h-8 bg-green border-0 rounded-[4px] flex items-center justify-center"
+                [class.disabled]="!paginationControl.left">
+                <img *ngIf="paginationControl.left" src="../../../../../assets/icons/arrows/arrow-left24_W.svg"
+                    alt="上一步 選項">
+                <img *ngIf="!paginationControl.left" src="../../../../../assets/icons/arrows/arrow-left24_G.svg"
+                    alt="上一步 選項">
+            </button>
+            <button
+                class="w-8 h-8 text-sm text-grey border border-grey-light rounded-[4px] flex items-center justify-center"
+                *ngFor="let page of getPages()" (click)="changePage(page.index)" [class.selected]='page.selected'>
+                {{page.display}}
+            </button>
+            <button (click)="next()" class="w-8 h-8 bg-green border-0 rounded-[4px] flex items-center justify-center"
+                [class.disabled]="!paginationControl.right">
+                <img *ngIf="paginationControl.right" src="../../../../../assets/icons/arrows/arrow-right24_W.svg"
+                    alt="上一步 選項">
+                <img *ngIf="!paginationControl.right" src="../../../../../assets/icons/arrows/arrow-right24_G.svg"
+                    alt="上一步 選項">
+            </button>
         </div>
     </div>
-    <div class="px-[51px] flex items-center justify-center space-x-2">
-        <button (click)="previous()" class="w-8 h-8 bg-green border-0 rounded-[4px] flex items-center justify-center"
-            [class.disabled]="!paginationControl.left">
-            <img *ngIf="paginationControl.left" src="../../../../../assets/icons/arrows/arrow-left24_W.svg"
-                alt="上一步 選項">
-            <img *ngIf="!paginationControl.left" src="../../../../../assets/icons/arrows/arrow-left24_G.svg"
-                alt="上一步 選項">
-        </button>
-        <button
-            class="w-8 h-8 text-sm text-grey border border-grey-light rounded-[4px] flex items-center justify-center"
-            *ngFor="let page of getPages()" (click)="changePage(page.index)" [class.selected]='page.selected'>
-            {{page.display}}
-        </button>
-        <button (click)="next()" class="w-8 h-8 bg-green border-0 rounded-[4px] flex items-center justify-center"
-            [class.disabled]="!paginationControl.right">
-            <img *ngIf="paginationControl.right" src="../../../../../assets/icons/arrows/arrow-right24_W.svg"
-                alt="上一步 選項">
-            <img *ngIf="!paginationControl.right" src="../../../../../assets/icons/arrows/arrow-right24_G.svg"
-                alt="上一步 選項">
-        </button>
+
+    <div *ngIf="failedMode" class="w-full h-[400px] flex justify-center items-center">
+        <div class="flex flex-col items-center">
+            <img class="mb-[15.8px]" src="../../../../../assets/icons/misc/nofound80.svg" alt="搜尋失敗">
+            <p class="leading-9 text-green text-xl font-bold text-center">目前查無資料 <br> 請重新搜尋</p>
+        </div>
     </div>
+
+
 </section>

@@ -1,3 +1,4 @@
+import { AllGroupsService } from './../../../../service/all-groups.service';
 import { map, Subject } from 'rxjs';
 import { ApiRequestService } from './../../../../service/api-request.service';
 import { ActivatedRoute } from '@angular/router';
@@ -13,7 +14,7 @@ import { Page } from 'src/app/model/page';
 })
 export class SearchResultComponent implements OnInit {
     type!: 'ScenicSpot' | 'Activity' | 'Restaurant';
-    class!: string;
+    class?: string;
     totalLength!: number;
     chunked: any[] = [];
     currentPage = new Subject<number>();
@@ -28,15 +29,14 @@ export class SearchResultComponent implements OnInit {
     }
     previousCondition!: boolean;
 
-    constructor(private route: ActivatedRoute, private api: ApiRequestService, private common: CommonUtilitiesService) {
+    failedMode = true;
+    searchCity = false;
+    city!: string;
+    alt: any = [];
 
-        this.route.queryParams.subscribe(param => {
-            if (param['type'] && param['class']) {
-                this.type = param['type'];
-                this.class = param['class'];
-                this.getDataByClass();
-            }
-        })
+    constructor(private route: ActivatedRoute, private api: ApiRequestService, private common: CommonUtilitiesService, private allGroup: AllGroupsService) {
+
+        this.route.queryParams.subscribe(params => this.callMethodByParams(params))
     }
 
     ngOnInit(): void {
@@ -69,20 +69,14 @@ export class SearchResultComponent implements OnInit {
         }
 
         if (length > 5) {
-            // return this.pageIndex === 0
-            //     ? [this.pages[this.pageIndex], this.pages[this.pageIndex + 1], middle, this.pages[length - 2], this.pages[length - 1]]
-            //     : [this.pages[this.pageIndex-1], this.pages[this.pageIndex], middle, this.pages[length - 2], this.pages[length - 1]];
             if (this.pageIndex === 0 || this.pageIndex >= length - 2) {
                 return [this.pages[0], this.pages[1], middle, this.pages[length - 2], this.pages[length - 1]]
-            }
-
-            else {
+            } else {
                 return [this.pages[this.pageIndex - 1], this.pages[this.pageIndex], middle, this.pages[length - 2], this.pages[length - 1]]
             }
-
-        } else {
-            return this.pages
         }
+
+        return this.pages
 
     }
 
@@ -104,7 +98,6 @@ export class SearchResultComponent implements OnInit {
     private updateByScreenSize() {
         // Get the screen size stream.
         this.common.isTablet.subscribe(condition => {
-
             if (this.previousCondition !== condition) {
                 this.chunked = [];
                 this.chunked = condition ? _.chunk(this.source, 20) : _.chunk(this.source, 8);
@@ -112,8 +105,6 @@ export class SearchResultComponent implements OnInit {
                 this.changePage(0);
                 this.previousCondition = condition;
             }
-
-
         });
     }
 
@@ -132,14 +123,14 @@ export class SearchResultComponent implements OnInit {
         });
     }
 
-    private fetchData(fn: 'getScenicSpotList' | 'getActivityList' | 'getRestaurantList', i = 0) {
-        const alternatedData0 = `$filter=(contains(Class1,'${this.class}') or contains(Class2,'${this.class}') or contains(Class3,'${this.class}'))`;
-        const alternatedData1 = `$filter=(contains(Class1,'${this.class}') or contains(Class2,'${this.class}'))`;
-        const alternatedData2 = `$filter=contains(Class1,'${this.class}')`;
-        const alternatedData3 = `$filter=contains(Class,'${this.class}')`;
-        const data = [alternatedData0, alternatedData1, alternatedData2, alternatedData3];
+    private fetchData(fn: 'getScenicSpotList' | 'getActivityList' | 'getRestaurantList' | 'getScenicSpotByCity' | 'getActivityListByCity' | 'getRestaurantListByCity', i = 0) {
+        const cities = this.allGroup.getAllCities();
+        const cityIndex = Object.keys(cities).indexOf(this.city);
 
-        this.api[fn](data[i])
+        const city = Object.values(cities)[cityIndex];;
+
+        const execute = this.searchCity ? this.api[fn](city, this.alt[i]) : this.api[fn](this.alt[i])
+        execute
             .pipe(
                 map((spots: any) => {
                     return spots.filter((value: any) => !!value['Picture']['PictureUrl1'])
@@ -158,29 +149,77 @@ export class SearchResultComponent implements OnInit {
             }, err => {
                 if (err.status === 400) {
                     const next = i + 1
-                    if (next > 3) return;
+                    if (next > 3) {
+                        this.failedMode = true;
+                        return;
+                    };
                     this.fetchData(fn, next);
                 } else {
+                    this.failedMode = true;
                     alert('請求失敗請洽管理員');
                 }
             }, () => {
                 this.paginationInit();
                 this.changePage(0);
+                this.failedMode = false;
             });
     }
 
-    private getDataByClass() {
-        let fn: 'getScenicSpotList' | 'getActivityList' | 'getRestaurantList';
+    private callMethodByParams(params: any) {
+
+        const { type, class: cls, keyword, date, city } = params;
+
+        if (!type) return;
+
+
+        this.type = type;
+
+        if (cls && !keyword && !date && !city) {
+            this.alt = altMaker(cls).map(str => `$filter = (${str})`);
+            this.getDataByType();
+
+            return;
+        }
+
+        // type city date keyword
+        if (keyword && !cls) {
+            this.searchCity = city ? true : false;
+            this.city = city;
+            // contains(StartTime,'${date ? date : keyword}') or
+            let str = `contains(${this.type}Name, '${keyword}') or contains(Description, '${keyword}')`
+            if (date) str += `contains(StartTime, '${date}')`
+            this.alt = altMaker(keyword).map(a => `$filter = (${str + ' or ' + a})`);
+            console.log(this.alt);
+            this.getDataByType();
+            return;
+        }
+
+        function altMaker(target: any) {
+            const alt: any[] = [];
+            for (let i = 0; i < 4; i++) {
+
+                let str = alt.indexOf(alt[i - 1]) !== -1 && i > 1
+                    ? alt[i - 1] + ` or contains(Class${i},'${target}')` : i === 1 ? `contains(Class${i},'${target}')`
+                        : `contains(Class,'${target}')`;
+
+                alt.push(str);
+            }
+            return alt;
+        }
+    }
+
+    private getDataByType() {
+        let fn: 'getScenicSpotList' | 'getActivityList' | 'getRestaurantList' | 'getScenicSpotByCity' | 'getActivityListByCity' | 'getRestaurantListByCity';
 
         switch (this.type) {
             case 'ScenicSpot':
-                fn = 'getScenicSpotList'
+                fn = this.searchCity ? 'getScenicSpotByCity' : 'getScenicSpotList'
                 break;
             case 'Activity':
-                fn = 'getActivityList';
+                fn = this.searchCity ? 'getActivityListByCity' : 'getActivityList';
                 break;
             case 'Restaurant':
-                fn = 'getRestaurantList';
+                fn = this.searchCity ? 'getRestaurantListByCity' : 'getRestaurantList';
                 break;
         }
 

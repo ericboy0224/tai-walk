@@ -1,5 +1,5 @@
 import { AllGroupsService } from './../../../service/all-groups.service';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Type } from 'src/app/model/type-enum';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -9,12 +9,11 @@ import { ActivatedRoute, Router } from '@angular/router';
     styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-    type: 'ScenicSpot' | 'Restaurant' | 'Activity' = 'ScenicSpot';
     searchType!: string;
     isTablet!: boolean;
 
     searchOptions: {
-        type: string;
+        type: 'ScenicSpot' | 'Restaurant' | 'Activity';
         city?: string;
         date?: string;
         keyword?: string;
@@ -42,8 +41,8 @@ export class SearchComponent implements OnInit {
 
     init() {
         this.route.queryParams.subscribe(param => {
-            this.type = param['type'];
-            this.searchType = Type[this.type];
+            this.searchOptions.type = param['type'];
+            this.searchType = Type[this.searchOptions.type];
         })
     }
 
@@ -52,8 +51,10 @@ export class SearchComponent implements OnInit {
         this.dropdownControl.city = false;
     }
 
-    search(e:any) {
-        console.log(e.target);
+    search() {
+        if (!this.searchOptions.keyword) return;
+
+        this.router.navigate(['result'], { queryParams: { type: this.searchOptions.type, city: this.searchOptions.city, date: this.searchOptions.date, keyword: this.searchOptions.keyword }, relativeTo: this.route })
     }
 
 

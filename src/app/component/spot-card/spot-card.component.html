@@ -2,7 +2,7 @@
     <a class="w-full h-full flex flex-col" href="javascript:void(0);" [routerLink]="['/detail']"
         [queryParams]="{type:datum.type, id:datum.id}">
         <div class="w-full h-[160px] md:h-[200px] mb-[6px] md:mb-[10px] rounded-[20px] overflow-hidden">
-            <img class="h-full w-full" src="{{datum.picture.PictureUrl1}}"
+            <img class="h-full w-full hover:scale-[1.25] transition-all" src="{{datum.picture.PictureUrl1}}"
                 onerror="this.src='../../../../assets/error/NoImage-255x200.png'"
                 alt="{{datum.picture.PictureDescription1}}">
         </div>

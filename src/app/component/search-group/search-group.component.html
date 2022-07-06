@@ -30,8 +30,7 @@
         <article class="h-full w-full">
             <input
                 class="w-full h-full flex items-center justify-between bg-white border-solid border rounded-[5px] border-grey-border px-[30px] font-normal font-base text-black-300 focus:outline-none"
-                [class.border-red-700]="keyword.invalid&& (keyword.dirty || keyword.touched)" type="text"
-                [(ngModel)]="defaultOptions.keyword" #keyword="ngModel" id="keyword" name="keyword" required
+                type="text" [(ngModel)]="defaultOptions.keyword" #keyword="ngModel" id="keyword" name="keyword" required
                 [placeholder]="keyword.invalid&& (keyword.dirty || keyword.touched)?'輸入關鍵字後再點擊搜尋':'你想去哪裡？請輸入關鍵字'">
         </article>
     </div>
