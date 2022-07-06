@@ -93,7 +93,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
         tiles.addTo(this.map);
 
         const icon = L.icon({
-            iconUrl: '../../../../assets/icons/spots/spot24_R.svg',
+            iconUrl: 'assets/icons/spots/spot24_R.svg',
             className: "marker",
             iconSize: [24, 40],
             iconAnchor: [12, 40],
