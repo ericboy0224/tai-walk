@@ -181,15 +181,15 @@
                 <h1 class="text-2xl text-black-700 font-light">還有這些不能錯過</h1>
             </div>
             <div [ngSwitch]="getByValue(detailInfo.type)">
-                <a *ngSwitchCase="'ScenicSpot'" class="no-underline" href="javascript:void(0);">
+                <a *ngSwitchCase="'ScenicSpot'" class="no-underline" [routerLink]="['/search']" [queryParams]="{type:getByValue(detailInfo.type)}">
                     <div class="flex items-center text-orange">查看更多景點 <mat-icon>chevron_right</mat-icon>
                     </div>
                 </a>
-                <a *ngSwitchCase="'Restaurant'" class="no-underline" href="javascript:void(0);">
+                <a *ngSwitchCase="'Restaurant'" class="no-underline" [routerLink]="['/search']" [queryParams]="{type:getByValue(detailInfo.type)}">
                     <div class="flex items-center text-orange">查看更多美食 <mat-icon>chevron_right</mat-icon>
                     </div>
                 </a>
-                <a *ngSwitchCase="'Activity'" class="no-underline" href="javascript:void(0);">
+                <a *ngSwitchCase="'Activity'" class="no-underline" [routerLink]="['/search']" [queryParams]="{type:getByValue(detailInfo.type)}">
                     <div class="flex items-center text-orange">查看更多活動 <mat-icon>chevron_right</mat-icon>
                     </div>
                 </a>
