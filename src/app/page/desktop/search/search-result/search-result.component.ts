@@ -1,5 +1,5 @@
 import { AllGroupsService } from './../../../../service/all-groups.service';
-import { map, Subject } from 'rxjs';
+import { map, Subject, timer } from 'rxjs';
 import { ApiRequestService } from './../../../../service/api-request.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -110,16 +110,18 @@ export class SearchResultComponent implements OnInit {
 
     private updateByPageNumber() {
         this.currentPage.subscribe((pageNumber: number) => {
-            this.pageIndex = pageNumber;
-            this.paginationControl.right = pageNumber === this.pages.length - 1 ? false : true;
-            this.paginationControl.left = pageNumber === 0 ? false : true;
+            if (this.totalLength > 0) {
+                this.pageIndex = pageNumber;
+                this.paginationControl.right = pageNumber === this.pages.length - 1 ? false : true;
+                this.paginationControl.left = pageNumber === 0 ? false : true;
 
-            _.forEach(this.pages, (v, i) => {
-                v.selected = false;
-            })
+                _.forEach(this.pages, (v, i) => {
+                    v.selected = false;
+                })
 
-            this.pages[pageNumber].selected = true;
-            this.updateCurrentPage();
+                this.pages[pageNumber].selected = true;
+                this.updateCurrentPage();
+            }
         });
     }
 
@@ -137,7 +139,6 @@ export class SearchResultComponent implements OnInit {
                 }),
                 map((spots: any) =>
                     spots.map((spot: any) => CommonUtilitiesService.SetCommonCard(spot))),
-
             )
             .subscribe(v => {
                 this.source = v;
@@ -170,13 +171,17 @@ export class SearchResultComponent implements OnInit {
 
         if (!type) return;
 
-
         this.type = type;
 
         if (cls && !keyword && !date && !city) {
-            this.alt = altMaker(cls).map(str => `$filter = (${str})`);
+            const rawAlt = altMaker(cls);
+            this.alt = rawAlt.map(str => `$filter = (${str})&$top=${window.innerWidth < 704 ? 8 : 20}`);
             this.getDataByType();
 
+            timer(1000).subscribe(()=>{
+                this.alt = rawAlt.map(str => `$filter = (${str})`);
+                this.getDataByType();
+            })
             return;
         }
 
@@ -186,10 +191,15 @@ export class SearchResultComponent implements OnInit {
             this.city = city;
             // contains(StartTime,'${date ? date : keyword}') or
             let str = `contains(${this.type}Name, '${keyword}') or contains(Description, '${keyword}')`
-            if (date) str += `contains(StartTime, '${date}')`
-            this.alt = altMaker(keyword).map(a => `$filter = (${str + ' or ' + a})`);
-            console.log(this.alt);
+            if (date) str += `contains(StartTime, '${date}')`;
+            const rawAlt = altMaker(keyword);
+            this.alt = rawAlt.map(a => `$filter = (${str + ' or ' + a})&$top=${window.innerWidth < 704 ? 8 : 20}`);
             this.getDataByType();
+
+            timer(1000).subscribe(() => {
+                this.alt = rawAlt.map(a => `$filter = (${str + ' or ' + a})`);
+                this.getDataByType();
+            })
             return;
         }
 
