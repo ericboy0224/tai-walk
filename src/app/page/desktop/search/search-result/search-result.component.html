@@ -1,4 +1,5 @@
 <section class="w-full h-full">
+    <app-loading *ngIf="isLoading"></app-loading>
     <div>
         <h2 class="inline-block text-black-700 text-2xl font-light mr-[7px] mb-2">搜尋結果 </h2>
         <span class="text-grey text-sm font-normal">共有 <span class="text-gold">{{totalLength}}</span> 筆</span>

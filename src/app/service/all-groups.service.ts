@@ -1,4 +1,3 @@
-import { SearchCard } from './../model/search-card';
 import { Injectable } from '@angular/core';
 
 @Injectable({

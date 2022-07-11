@@ -12,30 +12,35 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 export class HotTopicComponent implements OnInit {
     type!: 'ScenicSpot' | 'Restaurant' | 'Activity';
     cards: SearchCard[] = [];
+    isLoading = true;
     constructor(private allGroup: AllGroupsService, private route: ActivatedRoute, private router: Router) { }
 
     ngOnInit(): void {
         this.route.queryParams.subscribe((param: any) => {
 
             // initial value of query params
-            if(!param['type']){
+            if (!param['type']) {
                 this.router.navigate([], { queryParams: { type: 'ScenicSpot' }, relativeTo: this.route });
             }
 
             this.type = param['type'];
-
+            if(this.type!== 'ScenicSpot' && this.type!=='Restaurant' && this.type!=='Activity'){
+                this.router.navigate(['/home'])
+            }
             const group = this.allGroup.getSubjects(this.type);
 
             this.cards = group.map((name, i) => ({
                 name: name,
                 img: `assets/theme/${this.type}/Theme-bg-${i + 1}.png`
             }));
-        })
+            this.isLoading = false;
+        },error=>this.router.navigate(['/home']));
+
 
     }
 
     search(cls: string) {
-        this.router.navigate(['../result'], { queryParams: { type: this.type, class: cls }, relativeTo: this.route })
+        this.router.navigate(['../result'], { queryParams: { type: this.type, class: cls }, relativeTo: this.route });
     }
 
 }

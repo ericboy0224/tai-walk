@@ -35,7 +35,10 @@ export class HomePageComponent implements OnInit {
             keyword: ''
         }
 
-    constructor(private api: ApiRequestService, private router: Router, private groups:AllGroupsService) { }
+    isLoading = true;
+    fourPartsLoading = 0;
+
+    constructor(private api: ApiRequestService, private router: Router, private groups: AllGroupsService) { }
 
     ngOnInit(): void {
         this.getCarouselSpotList();
@@ -44,7 +47,7 @@ export class HomePageComponent implements OnInit {
         this.getCardSpotList('getRestaurantList', this.hotRestaurantInfos);
     }
 
-    search() {}
+    search() { }
 
     /***********  ACTIVITY  *****************/
     getActivitySpotList() {
@@ -53,6 +56,9 @@ export class HomePageComponent implements OnInit {
         this.api.getActivityList(apiData).subscribe((activities: any) => {
             from(activities).subscribe((activity: any) => {
                 this.activityInfos.push(CommonUtilitiesService.SetCommonCard(activity));
+            }, error => console.log(error), () => {
+                this.fourPartsLoading++;
+                this.isLoading = this.fourPartsLoading >= 4 ? false : true;
             })
         });
     }
@@ -105,6 +111,9 @@ export class HomePageComponent implements OnInit {
             from(requests).subscribe((r: any) => {
                 const response = r[0];
                 targetList.push(CommonUtilitiesService.SetCommonCard(response));
+            }, error => console.log(error), () => {
+                this.fourPartsLoading++;
+                this.isLoading = this.fourPartsLoading >= 4 ? false : true;
             })
         })
     }

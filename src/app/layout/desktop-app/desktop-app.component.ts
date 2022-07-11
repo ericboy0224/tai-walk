@@ -12,7 +12,6 @@ import { Component, HostListener, OnInit } from '@angular/core';
 
 export class DesktopAppComponent implements OnInit {
     isOpen: boolean = false;
-
     @HostListener('window:resize', ['$event'])
     onResize(event: any) {
         this.common.isTablet.next(event.target.innerWidth >= 704)
@@ -21,6 +20,7 @@ export class DesktopAppComponent implements OnInit {
     constructor(private router: Router, private common: CommonUtilitiesService) { }
 
     ngOnInit(): void {
+        if (!window.navigator.onLine) alert('請確認連線狀態後再進行瀏覽');
     }
 
     search(e: any) {

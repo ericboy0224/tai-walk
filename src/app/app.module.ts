@@ -15,6 +15,7 @@ import { SearchComponent } from './page/desktop/search/search.component';
 import { SearchGroupComponent } from './component/search-group/search-group.component';
 import { HotTopicComponent } from './page/desktop/search/hot-topic/hot-topic.component';
 import { SearchResultComponent } from './page/desktop/search/search-result/search-result.component';
+import { LoadingComponent } from './component/loading/loading/loading.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import { SearchResultComponent } from './page/desktop/search/search-result/searc
         SearchComponent,
         SearchGroupComponent,
         HotTopicComponent,
-        SearchResultComponent
+        SearchResultComponent,
+        LoadingComponent
     ],
     imports: [
         BrowserModule,

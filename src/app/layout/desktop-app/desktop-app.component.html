@@ -1,8 +1,9 @@
-<div class="z-[2000] backdrop-blur-sm bg-black-700 bg-opacity-10 fixed top-0 left-0 w-full h-full " *ngIf="isOpen"
+<div class="z-[2000] backdrop-blur-sm bg-black-700 bg-opacity-10 fixed top-0 right-0 translate-x-full -translate-y-full w-full h-full rounded-full transition-all duration-500"
+    [ngClass]="{'scale-150':isOpen,'translate-x-0':isOpen, 'translate-y-0':isOpen,'scale-0':!isOpen}"
     (click)="isOpen = false">
 </div>
-<nav class="z-[3000] w-[276px] h-[330px] pt-[17px] px-1 fixed top-0 right-0 bg-white border border-grey-light rounded-bl-[30px]"
-    *ngIf="isOpen">
+<nav class="z-[3000] w-[276px] h-[330px] pt-[17px] px-1 fixed top-0 right-0 bg-white border border-grey-light rounded-bl-[30px] translate-x-full opacity-0 transition-all duration-300"
+    [ngClass]="{'translate-x-0':isOpen,'opacity-100':isOpen}">
     <div class="flex pl-[26px] mb-[9px]">
         <img src="assets/icons/logos/Logo-mobile.svg" alt="台灣走走的手機 logo" class="h-[30px]">
         <a href="javascript:void(0);"
@@ -40,17 +41,20 @@
                 <a routerLink="/home"><img src="assets/icons/logos/Logo-mobile.svg" alt="台灣走走的手機 logo"></a>
             </div>
             <ul (click)="search($event)" class="hidden tablet:flex tablet:items-center">
-                <li class="m-auto text-lg font-400 text-grey hover:text-green mr-5  border-b-2 border-transparent hover:border-gold transition-all">
+                <li
+                    class="m-auto text-lg font-400 text-grey hover:text-green mr-5  border-b-2 border-transparent hover:border-gold transition-all">
                     <a href="javascript:void(0);" data-search="ScenicSpot">
                         探索景點
                     </a>
                 </li>
-                <li class="m-auto text-lg font-400 text-grey hover:text-green mr-5  border-b-2 border-transparent hover:border-gold transition-all">
+                <li
+                    class="m-auto text-lg font-400 text-grey hover:text-green mr-5  border-b-2 border-transparent hover:border-gold transition-all">
                     <a href="javascript:void(0);" data-search="Activity">
                         節慶活動
                     </a>
                 </li>
-                <li class="m-auto text-lg font-400 text-grey hover:text-green border-b-2 border-transparent hover:border-gold transition-all">
+                <li
+                    class="m-auto text-lg font-400 text-grey hover:text-green border-b-2 border-transparent hover:border-gold transition-all">
                     <a href="javascript:void(0);" data-search="Restaurant">
                         品嚐美食
                     </a>

@@ -33,8 +33,9 @@ export class SearchResultComponent implements OnInit {
     searchCity = false;
     city!: string;
     alt: any = [];
+    isLoading = true;
 
-    constructor(private route: ActivatedRoute, private api: ApiRequestService, private common: CommonUtilitiesService, private allGroup: AllGroupsService) {
+    constructor(private route: ActivatedRoute, private api: ApiRequestService, private common: CommonUtilitiesService, private allGroup: AllGroupsService,) {
 
         this.route.queryParams.subscribe(params => this.callMethodByParams(params))
     }
@@ -150,6 +151,7 @@ export class SearchResultComponent implements OnInit {
                 this.paginationInit();
                 this.changePage(0);
                 this.failedMode = this.totalLength === 0 ? true : false;
+                this.isLoading = false;
             }, err => {
                 if (err.status === 400) {
                     const next = i + 1
@@ -178,7 +180,7 @@ export class SearchResultComponent implements OnInit {
             this.alt = rawAlt.map(str => `$filter = (${str})&$top=${window.innerWidth < 704 ? 8 : 20}`);
             this.getDataByType();
 
-            timer(1000).subscribe(()=>{
+            timer(1000).subscribe(() => {
                 this.alt = rawAlt.map(str => `$filter = (${str})`);
                 this.getDataByType();
             })

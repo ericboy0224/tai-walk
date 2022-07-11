@@ -34,6 +34,8 @@ export class DetailComponent implements OnInit, AfterViewInit {
         interval: 3000,
     }
 
+    isLoading = true;
+
     constructor(private api: ApiRequestService, private route: ActivatedRoute) { }
 
     ngOnInit(): void { }
@@ -58,16 +60,19 @@ export class DetailComponent implements OnInit, AfterViewInit {
             case 'ScenicSpot':
                 this.api.getScenicSpotList(appData).subscribe(source => {
                     this.commonCardSetter(source);
+                    this.isLoading = false;
                 });
                 break;
             case 'Restaurant':
                 this.api.getRestaurantList(appData).subscribe(source => {
                     this.commonCardSetter(source);
+                    this.isLoading = false;
                 });
                 break;
             case 'Activity':
                 this.api.getActivityList(appData).subscribe(source => {
                     this.commonCardSetter(source);
+                    this.isLoading = false;
                 });
                 break;
         }
