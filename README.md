@@ -3,7 +3,7 @@
 ## Description
 
 The purpose of this project is to do a summary of what I have learned, 
-and learn things that I've looked for it for a long time but still got no chances to use on my job.
+and learn things that I've been looking for it for a long time but still got no chances to use on my job.
 
 - FRAMEWORK: Angular
 - CSS FRAMEWORK: TailwindCss
